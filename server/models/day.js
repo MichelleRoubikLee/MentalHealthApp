@@ -1,13 +1,13 @@
 
 const mongoose = require('mongoose');
 const Joi = require('joi');
-// const CORS = require('cors');
+const CORS = require('cors');
 const config = require('config');
 
 
 //day schema goes here
 const daySchema = new mongoose.Schema({
-    userId: {type: String, required: true, minlength: 5, maxlength: 255 },
+    // userId: {type: String, required: true, minlength: 5, maxlength: 255 },
     date: {type: Date, default: Date.now()},
     location: {type: String, required: false},
 
@@ -28,8 +28,7 @@ const Day = mongoose.model('day',daySchema);
 
 function validateDay(day) {
     const schema = Joi.object({
-        userId: Joi.string().min(5).max(50).required(),
-        date: Joi.number(),
+        // userId: Joi.string().min(5).max(50).required(),
 
         anxiety: Joi.number(),
         depression: Joi.number(),
