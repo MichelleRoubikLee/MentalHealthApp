@@ -4,14 +4,15 @@ const Joi = require('joi');
 // const CORS = require('cors');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const { daySchema } = require('./day');
 
 //user schema goes here
 const userSchema = new mongoose.Schema({
     userName: {type: String, required: true, minlength: 5, maxlength: 255 },
     joinDate: {type: Date, default: Date.now()},
-    location: {type: String, maxlength: 500},
     email: {type: String, required: false},
-    password: {type: String, required: false}
+    password: {type: String, required: false},
+    logs: [daySchema]
 });
     
 userSchema.methods.generateAuthToken = function () {
