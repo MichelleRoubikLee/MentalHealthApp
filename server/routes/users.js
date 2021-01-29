@@ -38,7 +38,6 @@ router.post('/new', async (req,res) => {
         const salt = await bcrypt.genSalt(10);
         user = new User ({
             userName: req.body.userName,
-            // joinDate: req.body.joinDate, -- may want to switch this to Date.now() and pass in on registration
             email: req.body.email,
             password:await bcrypt.hash(req.body.password, salt),
         });
