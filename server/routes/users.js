@@ -2,7 +2,7 @@ const { User, validateUser } = require("../models/user");
 const { Day, validateDay } = require("../models/day");
 
 const bcrypt = require('bcrypt');
-// const auth = require('../middleware/auth');
+const auth = require('../middleware/auth');
 const express = require("express");
 const router = express.Router();
 
@@ -30,7 +30,7 @@ router.get("/:userId", async (req, res) => {
 //register new user
 router.post('/new', async (req,res) => {
     try {
-        const{error}=validateUser(req.body);
+        const{error} = validateUser(req.body);
         if (error)
             return res.status(500).send(error.details[0].message);
         let user = await User.findOne({ email:req.body.email});
@@ -43,19 +43,37 @@ router.post('/new', async (req,res) => {
         });
         
         await user.save();
-        return res.send(user);
+        //return res.send(user);
+        const token = user.generateAuthToken();
         // const token = user.generateAuthToken();
-        // // const token = user.generateAuthToken();
-        // return res
-        //     .header('x-auth-token', token)
-        //     .header('access-control-expose-headers', 'x-auth-token')
-        //     .send({_id: user._id, userName: user.userName, email: user.email});
+        return res
+            .header('x-auth-token', token)
+            .header('access-control-expose-headers', 'x-auth-token')
+            .send({_id: user._id, userName: user.userName, email: user.email});
       } catch (ex) {
         return res.status(500).send(`InternalServerError:${ex}`);
     }
 });
 
-
+router.post("/login", async (req, res) => {
+    try {
+        // const { error } = validateLogin(req.body);
+        // if (error) return res.status(400).send(error.details[0].message);
+    
+        let user = await User.findOne({ email: req.body.email });
+        if (!user) return res.status(400).send("Invalid email or password.");
+    
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+    
+        if (!validPassword) return res.status(400).send("Invalid email or password.");
+        const token = user.generateAuthToken();
+        //console.log(token)
+        return res.send(token);
+    } catch (ex) {
+        return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
+});
+  
 
 //add a day
 router.put('/:userId/day', async (req, res) => {

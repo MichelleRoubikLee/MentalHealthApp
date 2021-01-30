@@ -1,14 +1,13 @@
 
 const mongoose = require('mongoose');
 const Joi = require('joi');
-// const CORS = require('cors');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const { daySchema } = require('./day');
 
 //user schema goes here
 const userSchema = new mongoose.Schema({
-    userName: {type: String, required: true, minlength: 5, maxlength: 255 },
+    userName: {type: String, required: true, minlength: 3, maxlength: 255 },
     joinDate: {type: Date, default: Date.now()},
     email: {type: String, required: false},
     password: {type: String, required: false},
@@ -23,9 +22,8 @@ const User = mongoose.model('user',userSchema);
 
 function validateUser(user) {
     const schema = Joi.object({
-        userName: Joi.string().min(5).max(50).required(),
-        location: Joi.string().min(5).max(255),
-        email: Joi.string().min(5).max(255).required().email(),
+        userName: Joi.string().min(3).max(50).required(),
+        email: Joi.string().min(3).max(255).required().email(),
         password: Joi.string().min(5).max(1024).required(),
     });
     return schema.validate(user);

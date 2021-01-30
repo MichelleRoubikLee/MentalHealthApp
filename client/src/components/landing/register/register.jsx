@@ -33,7 +33,6 @@ function Register(props) {
     const handleRegister = (event) => {
         event.preventDefault();
         const newurl = 'http://localhost:5000/api/users/new';
-        
         axios({
             method: 'post',
             url: newurl,
@@ -43,7 +42,9 @@ function Register(props) {
                 email: register.email
             }
         }).then(() => {
+            console.log("user added");
             getCurrentUser();
+            
         })
         //console.log(register);
         // .then((response) => {
