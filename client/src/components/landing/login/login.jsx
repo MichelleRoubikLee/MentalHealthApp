@@ -25,7 +25,7 @@ function Login (props) {
             });
             
         })
-        console.log('getCurrentUser() Called')
+        // console.log('getCurrentUser() Called')
     }
 
     const handleChange = (event) => {
@@ -54,7 +54,7 @@ function Login (props) {
                 // history.push("/Home");
             }
             getCurrentUser();
-            console.log(response)
+            // console.log(response)
         });
     }
 
