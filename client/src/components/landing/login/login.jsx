@@ -38,7 +38,7 @@ function Login (props) {
     
     const handleLogin = (event) => {
         event.preventDefault();
-        const newurl = 'http://localhost:5000/api/auth/login';
+        const newurl = 'http://localhost:5000/api/users/login';
         axios({
             method: 'post',
             url: newurl,
@@ -54,7 +54,7 @@ function Login (props) {
                 // history.push("/Home");
             }
             getCurrentUser();
-            // console.log(response)
+            console.log(response)
         });
     }
 
