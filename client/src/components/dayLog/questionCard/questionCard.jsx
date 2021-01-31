@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import {API_BASE_URL} from '../../config/default';
+import "./questionCard.css"
 
 
 
@@ -30,7 +31,7 @@ function QuestionCard(props) {
     return (
         <div className="QuestionCard">
             <form onSubmit={handleSubmit} className="form-floating">
-            <label htmlFor="">{props.question}</label>
+            <div className="">{props.question}</div>
             <input type="radio" name="choice" value="yes"></input>
             <input type="radio" name="choice" value="no"></input>
             <button type="submit" className="btn-sm">Add</button>
