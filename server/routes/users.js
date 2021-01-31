@@ -1,5 +1,7 @@
 const { User, validateUser } = require("../models/user");
-const { Day, validateDay } = require("../models/day");
+const { Factor, validateFactor } = require("../models/factor");
+const { Log, validateLog } = require("../models/log");
+
 
 const bcrypt = require('bcrypt');
 const auth = require('../middleware/auth');
@@ -73,40 +75,5 @@ router.post("/login", async (req, res) => {
 });
   
 
-//add a day
-router.put('/:userId/day', async (req, res) => {
-    try{
-        const { error } = validateDay(req.body);
-        if(error) return res.status(400).send("ValidationError " + error);
-        
-        const day = new Day ({
-            // location: req.body.location,
-            anxiety: req.body.anxiety,
-            depression: req.body.depression,
-            stress: req.body.stress,
-
-            temperature: req.body.temperature,
-            airQuality: req.body.airQuality,
-            sleepTime: req.body.sleepTime,
-            meditation: req.body.meditation,
-            exerciseTime: req.body.exerciseTime,
-            eatBreakfast: req.body.eatBreakfast
-        });
-        
-        const user = await User.findByIdAndUpdate(
-            req.params.userId,
-            {$push: {logs: day}},
-            {new: true}
-        );
-        
-        if (!day) return res.status(400).send(`The user with id "${req.params.userid}" does not exist.`);
-
-        await user.save();
-        return res.send(user);
-
-    } catch(err) {
-        return res.status(500).send(`Internal Server Error: ${err}`);
-    }
-});
 
 module.exports = router;
