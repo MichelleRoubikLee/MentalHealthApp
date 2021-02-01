@@ -7,23 +7,22 @@ const auth = require('../middleware/auth');
 const express = require("express");
 const router = express.Router();
 
-//add a new factor
-router.put('/:userId/factor', async (req, res) => {
+//add a new log
+router.put('/:userId/:factorId/log', async (req, res) => {
     try{
-        const { error } = validateFactor(req.body);
+        const { error } = validateLog(req.body);
         if(error) return res.status(400).send("ValidationError " + error);
         
-        const factor = new Factor ({
-            factorName: req.body.factorName,
-            question: req.body.question,
-            answers: req.body.answers
+        const log = new Log ({
+            result: req.body.result,
         });
-        
-        const user = await User.findByIdAndUpdate(
-            req.params.userId,
-            {$push: {factors: factor}},
+
+        const user = await User.findOneAndUpdate(
+            {"_id": req.params.userId, "factors._id": req.params.factorId},
+            {$push: {logs: log}},
             {new: true}
         );
+        console.log(user);
         
         if (!user) return res.status(400).send(`The user with id "${req.params.userid}" does not exist.`);
 
@@ -35,8 +34,5 @@ router.put('/:userId/factor', async (req, res) => {
     }
 });
 
-
-
-//add a new log
 
 module.exports = router;

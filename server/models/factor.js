@@ -20,7 +20,8 @@ const Factor = mongoose.model('factor',factorSchema);
 function validateFactor(factor) {
     const schema = Joi.object({
        factorName: Joi.string().min(3).max(255).required(),
-       question: Joi.string().required()
+       question: Joi.string().required(),
+       answers: Joi.string().required()
     });
     return schema.validate(factor);
 }
