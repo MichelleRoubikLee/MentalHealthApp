@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 import Landing from "./components/landing/landing";
 import DayLog from "./components/dayLog/dayLog";
 import NavBar from "./components/nav/navbar/navbar";
-import SideBar from "./components/nav/sidebar/sidebar";
 
 import jwt_decode from "jwt-decode";
 import {API_BASE_URL} from './components/config/default';
@@ -33,10 +33,21 @@ function App() {
 
     return (
         <div className="App">
-            <NavBar/>
-            <SideBar/>
-            <Landing getUser = {getUser}/>        
-            <DayLog userData={userData} setUserData={setUserData} factors={userData.factors}/>
+            <Router>
+                <NavBar/>
+
+                <Switch>
+                    <Route path="/landing">
+                        <Landing getUser = {getUser}/>  
+                    </Route>
+                    <Route path="/daylog">
+                        <DayLog userData={userData} setUserData={setUserData} factors={userData.factors}/>
+                    </Route>
+                </Switch>
+                      
+                
+            </Router>
+            
         </div>
     );
 }
