@@ -4,8 +4,6 @@ import '../login/login.css';
 // import { useHistory, Redirect } from 'react-router-dom';
 
 
-
-
 function Login (props) {
 
     const [login, setLogin] = useState({ email: '', password: '', error: '' })
@@ -60,36 +58,36 @@ function Login (props) {
 
         
     return (
-            <div className = "loginInfo">
+        <div className = "loginInfo formStyles">
             <div>
                 <h1 className = "loginTitle" >Login</h1>
             </div>
-                <form className = "form-login form-floating" onSubmit={handleLogin}>
-                    <label htmlFor = "loginEmail">Email</label>
-                    <input 
-                        type = "text" 
-                        id = "loginEmail" 
-                        name = 'email'  
-                        className = "form-control text-box"
-                        value={login.email}
-                        onChange={handleChange}
-                    >
-                    
-                    </input>
-                    <label htmlFor = "loginPassword">Password</label>
-                    <input 
-                        type = "text" 
-                        id = "loginPassword" 
-                        name = 'password'  
-                        className = "form-control text-box"
-                        value={login.password}
-                        onChange={handleChange}
-                    >
+            <form className = "form-login form-floating" onSubmit={handleLogin}>
+                <label htmlFor = "loginEmail">Email</label>
+                <input 
+                    type = "text" 
+                    id = "loginEmail" 
+                    name = 'email'  
+                    className = "form-control text-box"
+                    value={login.email}
+                    onChange={handleChange}
+                >
+                
+                </input>
+                <label htmlFor = "loginPassword">Password</label>
+                <input 
+                    type = "text" 
+                    id = "loginPassword" 
+                    name = 'password'  
+                    className = "form-control text-box"
+                    value={login.password}
+                    onChange={handleChange}
+                >
 
-                    </input>
-                    <button type="submit" className="btn btn-lg btn-success btn-block">Login</button>
-                </form>
-            </div>
+                </input>
+                <button type="submit" className="btn btn-success">Login</button>
+            </form>
+        </div>
     )
 }
 

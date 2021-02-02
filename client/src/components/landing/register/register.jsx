@@ -99,7 +99,7 @@ function Register(props) {
         // }
     
 return (            
-    <div className = "registerInfo">
+    <div className = "registerInfo formStyles">
       <div>
         <h1 className = "registerTitle" >Register</h1>
       </div>
@@ -136,7 +136,7 @@ return (
             >
 
             </input>
-            <button type="submit" className="btn btn-lg btn-primary btn-block">Register</button>
+            <button type="submit" className="btn btn-primary">Register</button>
         </form>
     </div>
 )

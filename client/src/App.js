@@ -3,6 +3,9 @@ import axios from 'axios';
 import './App.css';
 import Landing from "./components/landing/landing";
 import DayLog from "./components/dayLog/dayLog";
+import NavBar from "./components/nav/navbar/navbar";
+import SideBar from "./components/nav/sidebar/sidebar";
+
 import jwt_decode from "jwt-decode";
 import {API_BASE_URL} from './components/config/default';
 
@@ -30,6 +33,8 @@ function App() {
 
     return (
         <div className="App">
+            <NavBar/>
+            <SideBar/>
             <Landing getUser = {getUser}/>        
             <DayLog userData={userData} setUserData={setUserData} factors={userData.factors}/>
         </div>

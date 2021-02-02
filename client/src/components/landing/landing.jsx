@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Login from "./login/login";
 import Register from "./register/register"
+import "./landing.css"
 
 
 
