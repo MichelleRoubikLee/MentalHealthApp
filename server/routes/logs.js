@@ -17,16 +17,28 @@ router.put('/:userId/:factorId/log', async (req, res) => {
             result: req.body.result,
         });
 
-        const user = await User.findOneAndUpdate(
-            {"_id": req.params.userId, "factors._id": req.params.factorId},
-            {$push: {logs: log}},
-            {new: true}
-        );
+        //cannot query user until after init
+        // const factor = await user.findOneAndUpdate(
+        //     {"factors._id": req.params.factorId},
+        //     {$push: {logs: log}},
+        //     {new: true}
+        // )
+
+        // const user = await User.findOneAndUpdate(
+        //     {"_id": req.params.userId},
+        //     {$push: {factors: factor}},
+        //     {new: true}
+        // );
+
+        const user = await User.findById(req.params.userId);
+        await user.factors.id(req.params.factorId).logs.push(log);
+        await user.save()
+        
         console.log(user);
         
         if (!user) return res.status(400).send(`The user with id "${req.params.userid}" does not exist.`);
 
-        await user.save();
+        //await user.save();
         return res.send(user);
 
     } catch(err) {

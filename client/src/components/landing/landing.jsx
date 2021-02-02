@@ -5,13 +5,13 @@ import Register from "./register/register"
 
 
 
-function Landing() {
+function Landing(props) {
 
     const [currentUser, setCurrentUser] = useState();
 
     return (
         <div className="Landing">
-            <Login currentUser = {currentUser} setCurrentUser = {setCurrentUser}/>
+            <Login currentUser = {currentUser} setCurrentUser = {setCurrentUser} getUser = {props.getUser}/>
             <Register currentUser = {currentUser} setCurrentUser = {setCurrentUser}/>
         </div>
     );

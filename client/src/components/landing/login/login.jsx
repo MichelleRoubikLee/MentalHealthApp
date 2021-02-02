@@ -19,7 +19,8 @@ function Login (props) {
         }).then((res) => {
             res.data.forEach(user => {
                 if(login.email === user.email){
-                    props.setCurrentUser(user._id);                                                
+                    props.setCurrentUser(user._id)
+                    ;                                                
                 }
                 
             });
@@ -33,7 +34,6 @@ function Login (props) {
         setLogin(login => ({...login,
             [n]: event.target.value,
         }))
-        // console.log(n, event.target.value)
     }
     
     const handleLogin = (event) => {
@@ -48,13 +48,13 @@ function Login (props) {
             }
         })
         .then((response) => {
-            //console.log(response);
             if (response.status === 200) {
                 sessionStorage.setItem('sessionId', response.data);
                 // history.push("/Home");
             }
             getCurrentUser();
             console.log(response)
+            props.getUser()
         });
     }
 

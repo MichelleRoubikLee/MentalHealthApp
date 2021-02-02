@@ -5,47 +5,33 @@ import Landing from "./components/landing/landing";
 import DayLog from "./components/dayLog/dayLog";
 import jwt_decode from "jwt-decode";
 import {API_BASE_URL} from './components/config/default';
-import useFirstRender from "./firstRenderHook/useFirstRender";
 
 
 function App() {
-    const [userData, setUserData] = useState();
-    const firstRender = useFirstRender();
-    var factors = [];
+    const [userData, setUserData] = useState({factors: []});
 
-    
-
-    const getUser = () => {
+    const getUser = async () => {
         var token = sessionStorage.getItem('sessionId');
         var decoded = jwt_decode(token);
         const newurl = API_BASE_URL + decoded._id;
         // console.log(newurl);
-        axios({
+        const res = await axios({
             method: 'get',
             url: newurl,
-        }).then((res) => {
-            setUserData(res.data);
-            // console.log(res.data)
-        })
+        });
+        setUserData(res.data);
+        console.log(res.data);
     }
 
-    useEffect(() => {
-        getUser()
+    useEffect(async () => {
+        await getUser()
     }, []);
 
-    function findFactors(){
-        if(!firstRender){
-            userData.factors.map((oneFactor) => {
-                factors.push(oneFactor);
-            })
-        }
-    }
 
     return (
         <div className="App">
-            <Landing/>
-            {findFactors()}
-            <DayLog userData={userData} setUserData={setUserData} factors={factors}/>
+            <Landing getUser = {getUser}/>        
+            <DayLog userData={userData} setUserData={setUserData} factors={userData.factors}/>
         </div>
     );
 }
