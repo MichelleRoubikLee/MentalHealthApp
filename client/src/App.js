@@ -5,12 +5,14 @@ import './App.css';
 import Landing from "./components/landing/landing";
 import DayLog from "./components/dayLog/dayLog";
 import NavBar from "./components/nav/navbar/navbar";
+import Profile from "./components/profile/profile"
 
 import jwt_decode from "jwt-decode";
 import {API_BASE_URL} from './components/config/default';
 
 
 function App() {
+
     const [userData, setUserData] = useState({factors: []});
 
     const getUser = async () => {
@@ -23,7 +25,7 @@ function App() {
             url: newurl,
         });
         setUserData(res.data);
-        console.log(res.data);
+        //console.log(res.data);
     }
 
     useEffect(async () => {
@@ -34,14 +36,17 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <NavBar/>
-
+                <NavBar userData={userData} setUserData={setUserData}/>
+                
                 <Switch>
-                    <Route path="/landing">
-                        <Landing getUser = {getUser}/>  
+                    <Route path="/profile">
+                        <Profile userData={userData} setUserData={setUserData}/>
                     </Route>
                     <Route path="/daylog">
                         <DayLog userData={userData} setUserData={setUserData} factors={userData.factors}/>
+                    </Route>
+                    <Route path="/">
+                        <Landing getUser = {getUser}/>  
                     </Route>
                 </Switch>
                       
