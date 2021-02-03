@@ -16,20 +16,6 @@ router.put('/:userId/:factorId/log', async (req, res) => {
         const log = new Log ({
             result: req.body.result,
         });
-
-        //cannot query user until after init
-        // const factor = await user.findOneAndUpdate(
-        //     {"factors._id": req.params.factorId},
-        //     {$push: {logs: log}},
-        //     {new: true}
-        // )
-
-        // const user = await User.findOneAndUpdate(
-        //     {"_id": req.params.userId},
-        //     {$push: {factors: factor}},
-        //     {new: true}
-        // );
-
         const user = await User.findById(req.params.userId);
         await user.factors.id(req.params.factorId).logs.push(log);
         await user.save()
