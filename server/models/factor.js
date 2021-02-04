@@ -11,6 +11,7 @@ const factorSchema = new mongoose.Schema({
     factorName: {type: String, required: true, minlength: 3, maxlength: 255 },
     question: {type: String, required: true},
     answers: {type: String, required: true},
+    tracking: {type: Boolean},
     logs: [logSchema]
 });
     

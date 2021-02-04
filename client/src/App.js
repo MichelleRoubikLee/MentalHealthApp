@@ -12,9 +12,12 @@ import {API_BASE_URL} from './components/config/default';
 
 
 function App() {
+    //fix register so returns token like does in login
 
     const [userData, setUserData] = useState({factors: []});
     // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    
 
     const getUser = async () => {
         var token = sessionStorage.getItem('sessionId');

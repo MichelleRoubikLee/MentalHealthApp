@@ -16,7 +16,7 @@ router.put('/:userId/factor', async (req, res) => {
         const factor = new Factor ({
             factorName: req.body.factorName,
             question: req.body.question,
-            answers: req.body.answers
+            answers: req.body.answers,
         });
         
         const user = await User.findByIdAndUpdate(
