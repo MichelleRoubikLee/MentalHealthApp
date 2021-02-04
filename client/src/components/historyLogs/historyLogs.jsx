@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import HistoryCard from "./historyCard/historyCard"
-import "./historyLogs.css"
+import "../../styles.css"
 
 function HistoryLogs(props) {
 

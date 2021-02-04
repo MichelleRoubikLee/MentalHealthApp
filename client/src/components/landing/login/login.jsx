@@ -1,6 +1,7 @@
 import React, { useState }from 'react';
 import axios from 'axios';
 import '../login/login.css';
+import '../../../styles.css';
 // import { useHistory, Redirect } from 'react-router-dom';
 
 
@@ -58,7 +59,7 @@ function Login (props) {
 
         
     return (
-        <div className = "loginInfo formStyles">
+        <div className = "loginInfo flex-child">
             <div>
                 <h1 className = "loginTitle" >Login</h1>
             </div>

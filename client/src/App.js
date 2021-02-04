@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import './App.css';
+import './styles.css';
 import Landing from "./components/landing/landing";
 import DayLog from "./components/dayLog/dayLog";
 import NavBar from "./components/nav/navbar/navbar";

@@ -2,11 +2,3 @@
     border-style: ridge;
 }
 
-.HistoryCard{
-    border-style: solid;
-}
-
-.flex-child {
-    flex: 1;
-    margin: 1rem;
-}  
