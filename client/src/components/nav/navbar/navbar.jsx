@@ -22,7 +22,7 @@ function NavBar(props) {
                             <a className="nav-link" href="/daylog">Daily Log</a>
                         </li>
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">Log History</a>
+                            <a className="nav-link" href="/historylogs">Log History</a>
                         </li>
                         <li className="nav-item active">
                             <a className="nav-link" href="#">Visuals</a>

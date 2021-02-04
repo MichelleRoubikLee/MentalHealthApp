@@ -17,7 +17,7 @@ function Profile(props) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>Track Your Mental Health Concerns:</div>
             {mentalHealth.map((element, index) => (
-                <div>
+                <div key = {index}>
                     <label>
                         <input 
                             type="checkbox" 
@@ -30,7 +30,7 @@ function Profile(props) {
             ))}
             <div>Track Your Potential Factors:</div>
             {factors.map((element, index) => (
-                <div>
+                <div key = {index}>
                     <label>
                         <input 
                             type="checkbox" 

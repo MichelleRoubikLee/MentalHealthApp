@@ -6,7 +6,7 @@ import Landing from "./components/landing/landing";
 import DayLog from "./components/dayLog/dayLog";
 import NavBar from "./components/nav/navbar/navbar";
 import Profile from "./components/profile/profile"
-
+import HistoryLogs from "./components/historyLogs/historyLogs"
 import jwt_decode from "jwt-decode";
 import {API_BASE_URL} from './components/config/default';
 
@@ -14,6 +14,7 @@ import {API_BASE_URL} from './components/config/default';
 function App() {
 
     const [userData, setUserData] = useState({factors: []});
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const getUser = async () => {
         var token = sessionStorage.getItem('sessionId');
@@ -25,19 +26,17 @@ function App() {
             url: newurl,
         });
         setUserData(res.data);
-        //console.log(res.data);
     }
 
     useEffect(async () => {
         await getUser()
     }, []);
 
-
+    
     return (
         <div className="App">
             <Router>
                 <NavBar userData={userData} setUserData={setUserData}/>
-                
                 <Switch>
                     <Route path="/profile">
                         <Profile userData={userData} setUserData={setUserData}/>
@@ -45,14 +44,14 @@ function App() {
                     <Route path="/daylog">
                         <DayLog userData={userData} setUserData={setUserData} factors={userData.factors}/>
                     </Route>
+                    <Route path="/historylogs">
+                        <HistoryLogs userData={userData} setUserData={setUserData}/>
+                    </Route>
                     <Route path="/">
                         <Landing getUser = {getUser}/>  
                     </Route>
                 </Switch>
-                      
-                
             </Router>
-            
         </div>
     );
 }

@@ -33,9 +33,17 @@ function QuestionCard(props) {
         <div className="QuestionCard">
             <form onSubmit={handleSubmit} className="form-floating">
                 <div className="">{props.factor.question}</div>
-                <input type="radio" name="choice" onChange={handleChange} value="1"></input>
-                <input type="radio" name="choice" onChange={handleChange} value="0"></input>
-                <button type="submit" className="btn-sm">Add</button>
+                <label>
+                Good  
+                    <input type="radio" name="choice" onChange={handleChange} value="1"></input>
+                </label>
+                <br/>
+                <label>
+                    Bad  
+                    <input type="radio" name="choice" onChange={handleChange} value="0"></input>
+                </label>
+                
+                <button type="submit" className="btn-sm btn-success">Submit</button>
             </form>
         </div>
     );
