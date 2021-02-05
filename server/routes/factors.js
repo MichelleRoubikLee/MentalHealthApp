@@ -1,5 +1,6 @@
 const { User, validateUser } = require("../models/user");
-const { Factor, validateFactor } = require("../models/factor");
+const { Factor, validateFactor, Answers} = require("../models/factor");
+
 const { Log, validateLog } = require("../models/log");
 
 const bcrypt = require('bcrypt');
@@ -17,6 +18,7 @@ router.put('/:userId/factor', async (req, res) => {
             factorName: req.body.factorName,
             question: req.body.question,
             answers: req.body.answers,
+            tracking: req.body.tracking
         });
         
         const user = await User.findByIdAndUpdate(

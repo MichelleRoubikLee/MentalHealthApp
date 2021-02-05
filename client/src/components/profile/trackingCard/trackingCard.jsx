@@ -1,43 +1,41 @@
 import React from 'react';
 import axios from 'axios';
+import jwt_decode from "jwt-decode";
 
 import {API_FACTOR_URL} from '../../config/default';
-import useForm from "react-hook-form";
 
 
 function TrackingCard(props) {
-    const { register, handleSubmit } = useForm();
 
-    //check if any are already tracked and remove from list if true
+    var token = sessionStorage.getItem('sessionId');
+    var decoded = jwt_decode(token);
 
-
- 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(props.factor.factorName);
+        console.log(props.factor.question);
+        console.log(props.factor.answers);
+        const newurl = API_FACTOR_URL + decoded._id + "/factor";
+        axios({
+            method: 'put',
+            url: newurl,
+            data: {
+                factorName: props.factor.factorName,
+                question: props.factor.question,
+                answers: props.factor.answers,
+                tracking: true
+            }
+        })
+        
+    }      
     
 
-    const onSubmit = (event) => {
-        event.preventDefault();
-        const newurl = API_FACTOR_URL;
-        console.log(newurl);
-        
-        // axios({
-        //     method: 'post',
-        //     url: newurl,
-        //     data: {
-        //         factorName: MentalHealthData.factorName,
-        //         question: MentalHealthData.question,
-        //         answers: MentalHealthData.answers,
-        //     }
-        // }).then(() => {
-        //     console.log("user added");            
-        // })            
-    };
-
   return (
-    <div className="TrackingCard">{props.factor.factorName}
-        {/* <form onSubmit={handleSubmit(onSubmit)}>
-
-        <button type="submit">Submit</button>
-      </form> */}
+    <div className="TrackingCard">
+        <form onSubmit={handleSubmit}>
+        <label>{props.factor.factorName}</label>
+        <button type="submit">Start Tracking</button>
+      </form>
     </div>
   );
 }
