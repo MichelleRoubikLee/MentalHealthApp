@@ -68,7 +68,7 @@ function Profile(props) {
         <div>Track Your Mental Health Concerns and Factors:</div>
         {addTrackingCards()}
         {trackingArray.map((factorData, index) => (
-           <TrackingCard key={index} factor={factorData} /> 
+           <TrackingCard key={index} factor={factorData} getUser = {props.getUser}/> 
         ))}
         
     </div>

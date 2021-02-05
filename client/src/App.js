@@ -42,10 +42,10 @@ function App() {
                 <NavBar userData={userData} setUserData={setUserData}/>
                 <Switch>
                     <Route path="/profile">
-                        <Profile userData={userData} setUserData={setUserData}/>
+                        <Profile userData={userData} setUserData={setUserData} getUser = {getUser}/>
                     </Route>
                     <Route path="/daylog">
-                        <DayLog userData={userData} setUserData={setUserData} factors={userData.factors}/>
+                        <DayLog userData={userData} setUserData={setUserData} factors={userData.factors} getUser = {getUser}/>
                     </Route>
                     <Route path="/historylogs">
                         <HistoryLogs userData={userData} setUserData={setUserData}/>

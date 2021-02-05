@@ -10,7 +10,7 @@ function DayLog(props) {
         <div className="DayLog">
             {props.factors.map((oneFactor, index) => (
                 //check to see if currently being tracked or already logged for the day
-                <QuestionCard key={index} factor={oneFactor}/>
+                <QuestionCard key={index} factor={oneFactor} getUser = {props.getUser}/>
             ))}   
         </div>
     );

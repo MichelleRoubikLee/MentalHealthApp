@@ -26,7 +26,9 @@ function QuestionCard(props) {
             data: {
                 result: result
             },
-        })
+        }).then(() => {
+            props.getUser();
+         })  
     }
 
     return (

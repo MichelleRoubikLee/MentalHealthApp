@@ -25,7 +25,9 @@ function TrackingCard(props) {
                 answers: props.factor.answers,
                 tracking: true
             }
-        })
+        }).then(() => {
+           props.getUser();
+        })  
         
     }      
     
