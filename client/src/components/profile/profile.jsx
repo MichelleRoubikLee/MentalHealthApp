@@ -1,13 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import TrackingCard from './trackingCard/trackingCard'
-import {API_FACTOR_URL} from './../config/default';
 import "./profile.css"
-import useForm from "react-hook-form";
 
 
 function Profile(props) {
-    const { register, handleSubmit } = useForm();
     let trackingArray = [];
 
     let factorData = [
@@ -35,7 +31,6 @@ function Profile(props) {
             'factorName': 'Caffeine',
             'question': 'How many drinks with caffeine did you have today?',
             'answers': ['None','One','Two','Three','More than three']
-            [{4:'More than three'},{3:'Three'},{2:'Two'},{1:'One'},{0:'None'}]
         },
         {
             'factorName': 'Sleep',

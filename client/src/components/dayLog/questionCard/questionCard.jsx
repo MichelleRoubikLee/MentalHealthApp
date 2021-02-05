@@ -32,18 +32,18 @@ function QuestionCard(props) {
     }
 
     return (
-        <div className="QuestionCard">
+        <div className="QuestionCard flex-child">
             <form onSubmit={handleSubmit} className="form-floating">
                 <div className="">{props.factor.question}</div>
-                <label>
-                Good  
-                    <input type="radio" name="choice" onChange={handleChange} value="1"></input>
-                </label>
-                <br/>
-                <label>
-                    Bad  
-                    <input type="radio" name="choice" onChange={handleChange} value="0"></input>
-                </label>
+                {props.factor.answers.map((answer, index) => (
+                    <div key={index}>
+                        <label>  
+                            <input type="radio" name="choice" onChange={handleChange} value={index}></input>
+                            {answer}
+                        </label>
+                        <br/>
+                    </div>
+                ))}  
                 
                 <button type="submit" className="btn-sm btn-success">Submit</button>
             </form>
