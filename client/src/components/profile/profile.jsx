@@ -1,10 +1,12 @@
 import React from 'react';
-import TrackingCard from './trackingCard/trackingCard'
+import TrackingCard from './trackingCard/trackingCard';
+import WeatherTrackingCard from './weatherTrackingCard/weatherTrackingCard'
 import "./profile.css"
 
 
 function Profile(props) {
     let trackingArray = [];
+    let weatherTrackingArray = [];
 
     let factorData = [
         {
@@ -39,7 +41,19 @@ function Profile(props) {
         }
     ]
 
+    let weatherData = [
+        {
+            'factorName': 'Temperature'
+        },
+        {
+            'factorName': 'Pressure'
+        },
+        {
+            'factorName': 'Humidity'
+        }
+    ];
 
+    
 
     function addTrackingCards(){
         if(props.userData.factors.length == 0){
@@ -51,11 +65,24 @@ function Profile(props) {
                 )
             );
         }
-        
 
-        console.log(props.userData.factors)
-        console.log(trackingArray)
+        // console.log(props.userData.factors)
+        // console.log(trackingArray)
     }    
+
+    function addWeatherDataCards(){
+        console.log(props.userData.weatherFactors)
+
+        if(props.userData.weatherFactors === undefined  || props.userData.weatherFactors.length == 0){
+            weatherTrackingArray = weatherData;
+        }else{
+            weatherTrackingArray = weatherData.filter(array => 
+                props.userData.weatherFactors.every(filter => 
+                    filter.factorName !== array.factorName
+                )
+            );
+        }
+    }
 
 
   return (
@@ -64,6 +91,10 @@ function Profile(props) {
         {addTrackingCards()}
         {trackingArray.map((factorData, index) => (
            <TrackingCard key={index} factor={factorData} getUser = {props.getUser}/> 
+        ))}
+        {addWeatherDataCards()}
+        {weatherTrackingArray.map((weatherFactorData, index) => (
+           <WeatherTrackingCard key={index} factor={weatherFactorData} getUser = {props.getUser}/> 
         ))}
         
     </div>

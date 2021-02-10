@@ -4,6 +4,7 @@ const Joi = require('joi');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const { factorSchema } = require('./factor');
+const { weatherFactorSchema } = require('./weatherFactor');
 
 //user schema goes here
 const userSchema = new mongoose.Schema({
@@ -11,7 +12,8 @@ const userSchema = new mongoose.Schema({
     joinDate: {type: Date, default: Date.now()},
     email: {type: String, required: false},
     password: {type: String, required: false},
-    factors: [factorSchema]
+    factors: [factorSchema],
+    weatherFactors: [weatherFactorSchema]
 });
     
 userSchema.methods.generateAuthToken = function () {

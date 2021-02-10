@@ -4,17 +4,8 @@
     background-color: #fdfae3
 }
 
-.HistoryLogs{
-    width: 50%;
-    margin: auto;
-}
-
-.HistoryCard{
-    border-style: solid;
-}
 
 .flex-container {
-    display: flex;
 }
 
 .flex-child {
