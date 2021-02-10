@@ -59,6 +59,8 @@ function Profile(props) {
 
     function addTrackingCards(){
         if(!firstRender){
+            console.log(props.userData.factors)
+            
             if(props.userData.factors.length == 0){
                 trackingArray = factorData;
             }else{
@@ -74,6 +76,7 @@ function Profile(props) {
     function addWeatherDataCards(){
         // console.log(props.userData.weatherFactors)
         if(!firstRender){
+            console.log(props.userData.weatherFactors)
             if(props.userData.weatherFactors.length == 0){ //props.userData.weatherFactors === undefined  || 
                 weatherTrackingArray = weatherData;
             }else{

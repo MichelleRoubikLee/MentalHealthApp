@@ -2,6 +2,7 @@ import React, { useState }from 'react';
 import axios from 'axios';
 import '../register/register.css';
 import '../../../styles.css';
+//import { useHistory } from 'react-router-dom';
 
 
 function Register(props) {    
@@ -10,6 +11,7 @@ function Register(props) {
         password: "",
         email: "",
     });
+    //let history = useHistory();
     
     function getCurrentUser(){
         const newurl = 'http://localhost:5000/api/users/';
@@ -45,6 +47,7 @@ function Register(props) {
         }).then(() => {
             console.log("user added");
             getCurrentUser();
+            props.setIsLoggedIn(true);
             
         })            
     };

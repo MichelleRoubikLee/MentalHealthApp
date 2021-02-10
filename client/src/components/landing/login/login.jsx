@@ -2,13 +2,13 @@ import React, { useState }from 'react';
 import axios from 'axios';
 import '../login/login.css';
 import '../../../styles.css';
-// import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 function Login (props) {
 
     const [login, setLogin] = useState({ email: '', password: '', error: '' })
-    // let history = useHistory();
+    let history = useHistory();
 
     function getCurrentUser(){
         const newurl = 'http://localhost:5000/api/users/';
@@ -21,11 +21,8 @@ function Login (props) {
                     props.setCurrentUser(user._id)
                     ;                                                
                 }
-                
             });
-            
         })
-        // console.log('getCurrentUser() Called')
     }
 
     const handleChange = (event) => {
@@ -35,25 +32,26 @@ function Login (props) {
         }))
     }
     
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
         const newurl = 'http://localhost:5000/api/users/login';
-        axios({
+        await axios({
             method: 'post',
             url: newurl,
             data: {
                 email: login.email,
                 password: login.password
             }
-        })
-        .then((response) => {
-            if (response.status === 200) {
-                sessionStorage.setItem('sessionId', response.data);
-                // history.push("/Home");
+        }).then((res) => {
+            if (res.status === 200) {
+                sessionStorage.setItem('sessionId', res.data);
+                history.push("/daylog");
             }
             getCurrentUser();
-            console.log(response)
+            console.log(res)
+            props.setIsLoggedIn(true);
             props.getUser()
+            
         });
     }
 

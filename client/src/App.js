@@ -12,48 +12,76 @@ import {API_BASE_URL} from './components/config/default';
 
 
 function App() {
+    
     //fix register so returns token like does in login
+    //after register or login, go to daily log page
     //send token with all tracking updates
     //chartsjs api
 
     const [userData, setUserData] = useState({factors: []});
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const getUser = async () => {
-        var token = sessionStorage.getItem('sessionId');
-        var decoded = jwt_decode(token);
-        const newurl = API_BASE_URL + decoded._id;
-        // console.log(newurl);
-        const res = await axios({
-            method: 'get',
-            url: newurl,
-        });
-        setUserData(res.data);
+        console.log(isLoggedIn);
+        if(isLoggedIn){
+            console.log(isLoggedIn);
+            var token = sessionStorage.getItem('sessionId');
+            var decoded = jwt_decode(token);
+            const newurl = API_BASE_URL + decoded._id;
+            // console.log(newurl);
+            const res = await axios({
+                method: 'get',
+                url: newurl,
+            });
+            setUserData(res.data);
+        }
     }
 
     useEffect(async () => {
         await getUser()
     }, []);
 
+    // function renderSite(){
+    //     if(isLoggedIn){
+    //         return(
+    //             <div>
+    //                 <Route path="/profile">
+    //                     <NavBar userData={userData} setUserData={setUserData}/>
+    //                     <Profile userData={userData} setUserData={setUserData} getUser = {getUser}/>
+    //                 </Route>
+    //                 <Route path="/daylog">
+    //                     <NavBar userData={userData} setUserData={setUserData}/> 
+    //                     <DayLog userData={userData} setUserData={setUserData} factors={userData.factors} getUser = {getUser}/>
+    //                 </Route>
+    //                 <Route path="/historylogs">
+    //                     <NavBar userData={userData} setUserData={setUserData}/> 
+    //                     <HistoryLogs userData={userData} setUserData={setUserData}/>
+    //                 </Route>
+    //             </div>
+    //         )
+    //     }
+    // }
+
     
     return (
         <div className="App">
             <Router>
-                <NavBar userData={userData} setUserData={setUserData}/>
                 <Switch>
+                    {/* {renderSite()} */}
                     <Route path="/profile">
+                        <NavBar userData={userData} setUserData={setUserData}/>
                         <Profile userData={userData} setUserData={setUserData} getUser = {getUser}/>
                     </Route>
                     <Route path="/daylog">
+                        <NavBar userData={userData} setUserData={setUserData}/> 
                         <DayLog userData={userData} setUserData={setUserData} factors={userData.factors} getUser = {getUser}/>
                     </Route>
                     <Route path="/historylogs">
+                        <NavBar userData={userData} setUserData={setUserData}/> 
                         <HistoryLogs userData={userData} setUserData={setUserData}/>
                     </Route>
                     <Route path="/">
-                        <Landing getUser = {getUser}/>  
+                        <Landing getUser = {getUser} setIsLoggedIn={setIsLoggedIn}/>  
                     </Route>
                 </Switch>
             </Router>
