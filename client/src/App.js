@@ -13,7 +13,7 @@ import {API_BASE_URL} from './components/config/default';
 
 function App() {
     //fix register so returns token like does in login
-    //weather api
+    //send token with all tracking updates
     //chartsjs api
 
     const [userData, setUserData] = useState({factors: []});

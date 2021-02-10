@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
-// import {API_LOG_URL} from '../../config/default';
-// import openWeather from "../../../api/openWeather";
 import {API_WEATHER_KEY} from '../../config/default';
 
 
@@ -11,19 +9,19 @@ function WeatherCard(props) {
     var decoded = jwt_decode(token);
 
     const handleSubmit = (event) => {
-        const API_BASE_URL = 'api.openweathermap.org/data/2.5/weather';
+        event.preventDefault();
+        const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/weather';
         const zipCode = 53150;
-        const newurl = `${API_BASE_URL}?zip=${zipCode},us&appid=${API_WEATHER_KEY}`; 
+        const weatherUrl = `${WEATHER_API_URL}?zip=${zipCode},us&appid=${API_WEATHER_KEY}`; 
 
         axios({
-            method: 'put',
-            url: newurl,
+            method: 'get',
+            url: weatherUrl,
         }).then((res) => {
             const temp = res.data.main.temp;
-            console.log(temp)
+            console.log("submitted")
          })  
     };
-
 
     return (
         <div className="WeatherCard flex-child">

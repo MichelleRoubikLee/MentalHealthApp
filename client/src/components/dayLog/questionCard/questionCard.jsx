@@ -24,6 +24,7 @@ function QuestionCard(props) {
             url: newurl,
             headers: {'x-auth-token': token},
             data: {
+                date: new Date().toISOString(),
                 result: result
             },
         }).then(() => {

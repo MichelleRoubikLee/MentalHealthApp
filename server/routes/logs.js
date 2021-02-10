@@ -15,6 +15,7 @@ router.put('/:userId/:factorId/log', async (req, res) => {
         
         const log = new Log ({
             result: req.body.result,
+            date: req.body.date
         });
         const user = await User.findById(req.params.userId);
         await user.factors.id(req.params.factorId).logs.push(log);
