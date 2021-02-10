@@ -1,12 +1,14 @@
 import React from 'react';
 import TrackingCard from './trackingCard/trackingCard';
 import WeatherTrackingCard from './weatherTrackingCard/weatherTrackingCard'
-import "./profile.css"
-
+import "./profile.css";
+import useFirstRender from "../../firstRenderHook/useFirstRender";
 
 function Profile(props) {
     let trackingArray = [];
     let weatherTrackingArray = [];
+    const firstRender = useFirstRender();
+
 
     let factorData = [
         {
@@ -56,31 +58,31 @@ function Profile(props) {
     
 
     function addTrackingCards(){
-        if(props.userData.factors.length == 0){
-            trackingArray = factorData;
-        }else{
-            trackingArray = factorData.filter(array => 
-                props.userData.factors.every(filter => 
-                    filter.factorName !== array.factorName
-                )
-            );
+        if(!firstRender){
+            if(props.userData.factors.length == 0){
+                trackingArray = factorData;
+            }else{
+                trackingArray = factorData.filter(array => 
+                    props.userData.factors.every(filter => 
+                        filter.factorName !== array.factorName
+                    )
+                );
+            }
         }
-
-        // console.log(props.userData.factors)
-        // console.log(trackingArray)
     }    
 
     function addWeatherDataCards(){
-        console.log(props.userData.weatherFactors)
-
-        if(props.userData.weatherFactors === undefined  || props.userData.weatherFactors.length == 0){
-            weatherTrackingArray = weatherData;
-        }else{
-            weatherTrackingArray = weatherData.filter(array => 
-                props.userData.weatherFactors.every(filter => 
-                    filter.factorName !== array.factorName
-                )
-            );
+        // console.log(props.userData.weatherFactors)
+        if(!firstRender){
+            if(props.userData.weatherFactors.length == 0){ //props.userData.weatherFactors === undefined  || 
+                weatherTrackingArray = weatherData;
+            }else{
+                weatherTrackingArray = weatherData.filter(array => 
+                    props.userData.weatherFactors.every(filter => 
+                        filter.factorName !== array.factorName
+                    )
+                );
+            }
         }
     }
 

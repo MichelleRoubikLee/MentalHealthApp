@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "./navbar.css";
-import TrackList from "./../trackList/trackList"
+import TrackList from "./../trackList/trackList";
+import useFirstRender from "../../../firstRenderHook/useFirstRender";
+
 
 
 function NavBar(props) {
+    const firstRender = useFirstRender();
+
+    function showFactors(){
+        if(!firstRender){
+            return(
+                <ul className="nav flex-column mb-2">
+                    {props.userData.factors.map((factorData, index) => (
+                        <TrackList key={index} factor={factorData} />
+                    ))}
+                    {props.userData.weatherFactors.map((factorData, index) => (
+                        <TrackList key={index} factor={factorData} />
+                    ))}
+                </ul>
+            );
+        }
+    }
+    
 
     return (
         <div className="NavBar">
@@ -44,11 +63,7 @@ function NavBar(props) {
                                     <span data-feather="plus-circle"></span>
                                 </a>
                             </h6>
-                            <ul className="nav flex-column mb-2">
-                                {props.userData.factors.map((factorData, index) => (
-                                    <TrackList key={index} factor={factorData} />
-                                ))}
-                            </ul>
+                            {showFactors()}
                         </div>
                     </nav>
                 </div>
