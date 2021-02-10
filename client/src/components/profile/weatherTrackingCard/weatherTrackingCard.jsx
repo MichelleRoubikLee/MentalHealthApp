@@ -7,10 +7,11 @@ import {API_FACTOR_URL} from '../../config/default';
 function TrackingCard(props) {
 
     var token = sessionStorage.getItem('sessionId');
-    var decoded = jwt_decode(token);
+    
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        var decoded = jwt_decode(token);
         const newurl = API_FACTOR_URL + decoded._id + "/weatherfactor";
         axios({
             method: 'put',

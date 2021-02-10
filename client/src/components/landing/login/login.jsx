@@ -7,7 +7,10 @@ import { useHistory } from 'react-router-dom';
 
 function Login (props) {
 
-    const [login, setLogin] = useState({ email: '', password: '', error: '' })
+    const [login, setLogin] = useState({ 
+        email: '', 
+        password: ''
+    })
     let history = useHistory();
 
     function getCurrentUser(){
@@ -49,7 +52,6 @@ function Login (props) {
             }
             getCurrentUser();
             console.log(res)
-            props.setIsLoggedIn(true);
             props.getUser()
             
         });

@@ -6,7 +6,7 @@ import {API_WEATHER_KEY} from '../../config/default';
 
 function WeatherCard(props) {
     var token = sessionStorage.getItem('sessionId');
-    var decoded = jwt_decode(token);
+    //var decoded = jwt_decode(token);
 
     const handleSubmit = (event) => {
         event.preventDefault();

@@ -8,10 +8,11 @@ import {API_FACTOR_URL} from '../../config/default';
 function TrackingCard(props) {
 
     var token = sessionStorage.getItem('sessionId');
-    var decoded = jwt_decode(token);
+    
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        var decoded = jwt_decode(token);
         console.log(props.factor.factorName);
         console.log(props.factor.question);
         console.log(props.factor.answers);

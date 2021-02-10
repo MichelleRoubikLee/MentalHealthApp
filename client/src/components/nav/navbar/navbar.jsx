@@ -3,14 +3,17 @@ import axios from 'axios';
 import "./navbar.css";
 import TrackList from "./../trackList/trackList";
 import useFirstRender from "../../../firstRenderHook/useFirstRender";
+//import jwt_decode from "jwt-decode";
 
 
 
 function NavBar(props) {
     const firstRender = useFirstRender();
+    var token = sessionStorage.getItem('sessionId');
+    //var decoded = jwt_decode(token);
 
     function showFactors(){
-        if(!firstRender){
+        if(!firstRender && token){
             return(
                 <ul className="nav flex-column mb-2">
                     {props.userData.factors.map((factorData, index) => (

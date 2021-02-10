@@ -4,16 +4,19 @@ import QuestionCard from "./questionCard/questionCard"
 import WeatherCard from "./weatherCard/weatherCard"
 import "./dayLog.css";
 import useFirstRender from "../../firstRenderHook/useFirstRender";
+//import jwt_decode from "jwt-decode";
 
 
 
 function DayLog(props) {
     const firstRender = useFirstRender();
     var date = new Date().toISOString()
+    var token = sessionStorage.getItem('sessionId');
+    //var decoded = jwt_decode(token);
 
 
     function showQuestions(){
-       if(!firstRender){
+       if(!firstRender && token){
         props.userData.factors.forEach(element => {
             if(element.logs.length == 0){
                 console.log(element.logs.length)
@@ -21,9 +24,7 @@ function DayLog(props) {
                 console.log(element.logs[0].date);
                 console.log(date);
             }
-            
         });
-        //    console.log(props.userData.factors)
            return(
                <div>
                     {props.userData.factors.map((oneFactor, index) => (
@@ -35,7 +36,7 @@ function DayLog(props) {
     }
     
     function showWeatherQuestions(){
-        if(!firstRender){
+        if(!firstRender && token){
             return(
                 <div>
                     {props.userData.weatherFactors.map((oneFactor, index) => (

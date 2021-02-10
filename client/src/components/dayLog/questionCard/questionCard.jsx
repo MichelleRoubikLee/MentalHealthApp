@@ -10,7 +10,7 @@ function QuestionCard(props) {
     const [result, setResult] = useState()
 
     var token = sessionStorage.getItem('sessionId');
-    var decoded = jwt_decode(token);
+    
 
     function handleChange(event){
         setResult(event.target.value);
@@ -18,6 +18,7 @@ function QuestionCard(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        var decoded = jwt_decode(token);
         const newurl = API_LOG_URL + decoded._id + "/" + props.factor._id + "/log"; 
         axios({
             method: 'put',

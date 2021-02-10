@@ -13,8 +13,8 @@ function Landing(props) {
 
     return (
         <div className="Landing flex-container">
-            <Login currentUser = {currentUser} setCurrentUser = {setCurrentUser} getUser = {props.getUser} setIsLoggedIn={props.setIsLoggedIn}/>
-            <Register currentUser = {currentUser} setCurrentUser = {setCurrentUser} setIsLoggedIn={props.setIsLoggedIn}/>
+            <Login currentUser = {currentUser} setCurrentUser = {setCurrentUser} getUser = {props.getUser} />
+            <Register currentUser = {currentUser} setCurrentUser = {setCurrentUser} getUser = {props.getUser} />
         </div>
     );
 }
