@@ -13,7 +13,6 @@ import {API_BASE_URL} from './components/config/default';
 
 function App() {
     
-    //fix register so returns token like does in login
     //send token with all tracking updates
     //chartsjs api
 
@@ -42,7 +41,6 @@ function App() {
         <div className="App">
             <Router>
                 <Switch>
-                    {/* {renderSite()} */}
                     <Route path="/profile">
                         <NavBar userData={userData} setUserData={setUserData} />
                         <Profile userData={userData} setUserData={setUserData} getUser = {getUser}/>

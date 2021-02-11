@@ -37,9 +37,9 @@ function Login (props) {
                 sessionStorage.setItem('sessionId', res.data);
                 history.push("/profile");
             }
-            console.log(res)
-            props.getUser()
-            
+            console.log(res);
+            //get user sets
+            props.getUser();
         });
     }
 

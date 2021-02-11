@@ -8,6 +8,7 @@ function Profile(props) {
     let trackingArray = [];
     let weatherTrackingArray = [];
     const firstRender = useFirstRender();
+    //var token = sessionStorage.getItem('sessionId');
 
 
     let factorData = [
