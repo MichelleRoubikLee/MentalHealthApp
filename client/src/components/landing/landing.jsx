@@ -9,12 +9,11 @@ import "../../styles.css"
 
 function Landing(props) {
 
-    const [currentUser, setCurrentUser] = useState();
 
     return (
         <div className="Landing flex-container">
-            <Login currentUser = {currentUser} setCurrentUser = {setCurrentUser} getUser = {props.getUser} />
-            <Register currentUser = {currentUser} setCurrentUser = {setCurrentUser} getUser = {props.getUser} />
+            <Login  getUser = {props.getUser} />
+            <Register getUser = {props.getUser} />
         </div>
     );
 }

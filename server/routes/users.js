@@ -45,13 +45,9 @@ router.post('/new', async (req,res) => {
         });
         
         await user.save();
-        //return res.send(user);
         const token = user.generateAuthToken();
-        // const token = user.generateAuthToken();
-        return res
-            .header('x-auth-token', token)
-            .header('access-control-expose-headers', 'x-auth-token')
-            .send({_id: user._id, userName: user.userName, email: user.email});
+        console.log(token)
+        return res.send(token);
       } catch (ex) {
         return res.status(500).send(`InternalServerError:${ex}`);
     }

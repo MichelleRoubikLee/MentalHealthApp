@@ -22,11 +22,9 @@ function App() {
     var token = sessionStorage.getItem('sessionId');
 
     const getUser = async () => {
-        //console.log(isLoggedIn);
         if(token){
             var decoded = jwt_decode(token);
             const newurl = API_BASE_URL + decoded._id;
-            // console.log(newurl);
             const res = await axios({
                 method: 'get',
                 url: newurl,
@@ -38,27 +36,6 @@ function App() {
     useEffect(async () => {
         await getUser()
     }, []);
-
-    // function renderSite(){
-    //     if(isLoggedIn){
-    //         return(
-    //             <div>
-    //                 <Route path="/profile">
-    //                     <NavBar userData={userData} setUserData={setUserData}/>
-    //                     <Profile userData={userData} setUserData={setUserData} getUser = {getUser}/>
-    //                 </Route>
-    //                 <Route path="/daylog">
-    //                     <NavBar userData={userData} setUserData={setUserData}/> 
-    //                     <DayLog userData={userData} setUserData={setUserData} factors={userData.factors} getUser = {getUser}/>
-    //                 </Route>
-    //                 <Route path="/historylogs">
-    //                     <NavBar userData={userData} setUserData={setUserData}/> 
-    //                     <HistoryLogs userData={userData} setUserData={setUserData}/>
-    //                 </Route>
-    //             </div>
-    //         )
-    //     }
-    // }
 
     
     return (

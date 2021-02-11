@@ -12,25 +12,12 @@ function Register(props) {
         email: "",
     });
     let history = useHistory();
-    
-    function getCurrentUser(){
-        const newurl = 'http://localhost:5000/api/users/';
-        axios({
-            method: 'get',
-            url: newurl,
-        }).then((res) => {
-            if(res.email === register.email){
-                props.setCurrentUser(res._id)            
-            }
-        })
-    }
 
     const handleChange = (event) => {
         let n = event.target.name;
         setRegister(register => ({...register,
             [n]: event.target.value,
         }))
-        //console.log(n, event.target.value)
     }
     
     const handleRegister = (event) => {
@@ -50,7 +37,6 @@ function Register(props) {
                 sessionStorage.setItem('sessionId', res.data);
                 history.push("/profile");
             }
-            getCurrentUser();
             props.getUser();
         })            
     };

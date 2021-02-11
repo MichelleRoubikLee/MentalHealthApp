@@ -7,26 +7,12 @@ import { useHistory } from 'react-router-dom';
 
 function Login (props) {
 
+
     const [login, setLogin] = useState({ 
         email: '', 
         password: ''
     })
     let history = useHistory();
-
-    function getCurrentUser(){
-        const newurl = 'http://localhost:5000/api/users/';
-        axios({
-            method: 'get',
-            url: newurl,
-        }).then((res) => {
-            res.data.forEach(user => {
-                if(login.email === user.email){
-                    props.setCurrentUser(user._id)
-                    ;                                                
-                }
-            });
-        })
-    }
 
     const handleChange = (event) => {
         let n = event.target.name;
@@ -46,11 +32,11 @@ function Login (props) {
                 password: login.password
             }
         }).then((res) => {
+            console.log(res)
             if (res.status === 200) {
                 sessionStorage.setItem('sessionId', res.data);
-                history.push("/daylog");
+                history.push("/profile");
             }
-            getCurrentUser();
             console.log(res)
             props.getUser()
             
