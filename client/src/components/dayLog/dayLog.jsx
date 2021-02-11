@@ -17,7 +17,6 @@ function DayLog(props) {
 
     function showQuestions(){
         if(token && props.userData.factors != 0){
-            // if(!firstRender && token){
             props.userData.factors.forEach(element => {
                 if(element.logs.length == 0){
                     console.log(element.logs.length)
@@ -26,28 +25,25 @@ function DayLog(props) {
                     console.log(date);
                 }
             });
-                return(
-                    <div>
-                        {props.userData.factors.map((oneFactor, index) => (
-                            <QuestionCard key={index} factor={oneFactor} getUser = {props.getUser}/>
-                        ))} 
-                    </div>
-                )
-            //} 
+            return(
+                <div>
+                    {props.userData.factors.map((oneFactor, index) => (
+                        <QuestionCard key={index} factor={oneFactor} getUser = {props.getUser}/>
+                    ))} 
+                </div>
+            )
         }
     }
     
     function showWeatherQuestions(){
         if(!firstRender && token && props.userData.factors != 0){
-            //if(!firstRender && token){
-                return(
-                    <div>
-                        {props.userData.weatherFactors.map((oneFactor, index) => (
-                            <WeatherCard key={index} factor={oneFactor} getUser = {props.getUser}/>
-                        ))}
-                    </div>
-                )
-            //} 
+            return(
+                <div>
+                    {props.userData.weatherFactors.map((oneFactor, index) => (
+                        <WeatherCard key={index} factor={oneFactor} getUser = {props.getUser}/>
+                    ))}
+                </div>
+            )
         }
      }
 

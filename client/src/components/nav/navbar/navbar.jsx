@@ -47,7 +47,7 @@ function NavBar(props) {
                             <a className="nav-link" href="/historylogs">Log History</a>
                         </li>
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">Visuals</a>
+                            <a className="nav-link" href="/visual">Visuals</a>
                         </li>
                         <li className="nav-item active">
                             <a className="nav-link" href="/">Sign Out</a>
