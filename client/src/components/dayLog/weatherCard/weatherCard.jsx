@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
-import {API_WEATHER_KEY, API_FACTOR_URL} from '../../config/default';
+import {API_WEATHER_KEY, API_LOG_URL} from '../../config/default';
 
 
 
 function WeatherCard(props) {
     var token = sessionStorage.getItem('sessionId');
+    let data = "";
+    let temperature = "";
+    let humidity = ""; //humidity in %
+    let pressure = "";
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -18,32 +22,38 @@ function WeatherCard(props) {
             method: 'get',
             url: weatherUrl,
         }).then((res) => {
-            const temperature = res.data.main.temp;
-            //humidity in %
-            const humidity = res.data.main.humidity;
-            //pressure in hPa
-            const pressure = res.data.main.pressure;
-            console.log(res.data.main)
+            temperature = res.data.main.temp;  //in degF
+            humidity = res.data.main.humidity; //humidity in %
+            pressure = res.data.main.pressure; //pressure in hPa
+            //console.log(res.data.main)
         });
         saveToDb();
     };
 
     const saveToDb = async () => {
         var decoded = jwt_decode(token);
-        const newurl = API_FACTOR_URL + decoded._id + "/" + props.factor._id + "/weatherfactor"; 
-        //loop over weather factors to see if tracking, if yes, axios call
-        console.log(props.userData.weatherFactors);
-        // axios({
-        //     method: 'put',
-        //     url: newurl,
-        //     headers: {'x-auth-token': token},
-        //     data: {
-        //         date: new Date().toISOString(),
-        //         result: result
-        //     },
-        // }).then(() => {
-        //     props.getUser();
-        //  })  
+        
+            if(props.factor.factorName = 'Temperature'){
+                data = temperature;
+            }else if(props.factor.factorName = 'Humidity'){
+                data = humidity;
+            }else if(props.factor.factorName = 'Pressure'){
+                data = pressure;
+            }
+        
+        const newurl = API_LOG_URL + decoded._id + "/" + props.factor._id + "/weatherlog";
+        console.log(props.factor);
+        axios({
+            method: 'put',
+            url: newurl,
+            headers: {'x-auth-token': token},
+            data: {
+                date: new Date().toISOString(),
+                result: data
+            },
+        }).then(() => {
+            props.getUser();
+         })  
     }
 
     return (

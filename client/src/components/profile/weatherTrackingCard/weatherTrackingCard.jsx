@@ -18,6 +18,7 @@ function TrackingCard(props) {
             url: newurl,
             data: {
                 factorName: props.factor.factorName,
+                units: props.factor.units,
                 tracking: true
             }
         }).then(() => {

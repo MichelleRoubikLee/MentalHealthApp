@@ -43,6 +43,7 @@ router.put('/:userId/weatherfactor', async (req, res) => {
         
         const weatherFactor = new WeatherFactor ({
             factorName: req.body.factorName,
+            units: req.body.units,
             tracking: req.body.tracking
         });
         

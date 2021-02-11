@@ -13,11 +13,11 @@ import {API_BASE_URL} from './components/config/default';
 
 
 function App() {
-    // add welcome page to avoid re-rendering?
-    // store weather data in db
-    // send token with all tracking updates
+    // send token with factor additions, add auth on all backend additions
     // send log data to chart visual
     // calculate time now - time of last log to see if can log again or not
+    // add answer string to number in log history
+    // added features: add welcome page to avoid re-rendering, choose to stop tracking a feature, edit a factor log
 
     const [userData, setUserData] = useState({factors: []});
 
@@ -39,7 +39,6 @@ function App() {
         await getUser()
     }, []);
 
-    
     return (
         <div className="App">
             <Router>

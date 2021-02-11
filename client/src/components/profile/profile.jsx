@@ -46,22 +46,23 @@ function Profile(props) {
 
     let weatherData = [
         {
-            'factorName': 'Temperature'
+            'factorName': 'Temperature',
+            'units': 'Fahrenheit (degF)'
         },
         {
-            'factorName': 'Pressure'
+            'factorName': 'Humidity',
+            'units': 'Percent (%)'
         },
         {
-            'factorName': 'Humidity'
+            'factorName': 'Pressure',
+            'units': 'hecto Pascals (hPa)'
         }
     ];
 
     
 
     function addTrackingCards(){
-        if(!firstRender){
-            console.log(props.userData.factors)
-            
+        if(!firstRender){            
             if(props.userData.factors.length == 0){
                 trackingArray = factorData;
             }else{
