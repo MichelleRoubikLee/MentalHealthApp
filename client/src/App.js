@@ -57,7 +57,7 @@ function App() {
                     </Route>
                     <Route path="/visual">
                         <NavBar userData={userData} setUserData={setUserData}/> 
-                        <Visual userData={userData} setUserData={setUserData}/> 
+                        <Visual userData={userData} /> 
                         
                     </Route>
                     <Route path="/">
