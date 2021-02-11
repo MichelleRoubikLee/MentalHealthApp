@@ -3,32 +3,36 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import Chartjs from 'chart.js';
 
-const chartConfig = {
-    type: 'bar',
-    data: {
-      // ...
-    },
-    options: {
-      // ...
-    }
-};
 
 function Visual(props) {
-    const chartContainer = useRef(null);
-    const [chartInstance, setChartInstance] = useState(null);
+    const [chartData, setChartData] = useState({});
 
-    useEffect(() => {
-        if (chartContainer && chartContainer.current) {
-        const newChartInstance = new Chartjs(chartContainer.current, chartConfig);
-        setChartInstance(newChartInstance);
-        }
-    }, [chartContainer]);
+    const chart = () => {
+        setChartData({
+            labels: ['monday','tuesday','wednesday','thursday','friday'],
+            datasets: [
+                {
+                    label: 'anxiety',
+                    data: [1,4,3,0,3],
+                    backgroundColor: [
+                        '#ff6464'
+                    ],
+                    borderWidth: 4
+                }
+            ]
+        })
+    }
 
-    return (
-        <div>
-        <canvas ref={chartContainer} />
+    useEffect(()=> {
+        chart();
+    },[])
+
+    return(
+        <div className='Visual'>
+            <Line data={chartData}/>
         </div>
-    );
-  }
+    )
+    
+}
 
 export default Visual;
