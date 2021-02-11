@@ -14,8 +14,9 @@ import {API_BASE_URL} from './components/config/default';
 
 function App() {
     // add welcome page to avoid re-rendering?
+    // store weather data in db
     // send token with all tracking updates
-    // chartsjs api
+    // send log data to chart visual
     // calculate time now - time of last log to see if can log again or not
 
     const [userData, setUserData] = useState({factors: []});
@@ -61,7 +62,7 @@ function App() {
                         
                     </Route>
                     <Route path="/">
-                        <Landing getUser = {getUser}/>  
+                        <Landing userData={userData} getUser = {getUser}/>  
                     </Route>
                 </Switch>
             </Router>

@@ -40,7 +40,7 @@ function DayLog(props) {
             return(
                 <div>
                     {props.userData.weatherFactors.map((oneFactor, index) => (
-                        <WeatherCard key={index} factor={oneFactor} getUser = {props.getUser}/>
+                        <WeatherCard key={index} factor={oneFactor} getUser = {props.getUser} userData={props.userData}/>
                     ))}
                 </div>
             )
