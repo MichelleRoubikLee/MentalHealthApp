@@ -51,7 +51,11 @@ function DayLog(props) {
     function showQuestions(){
         if(token && props.userData.factors != 0){
             props.userData.factors.forEach(element => {
-                compareDates(element,questions);
+                if(element.logs.length == 0){
+                    questions.push(element);
+                }else{
+                    compareDates(element,questions);
+                }
             });
 
             return(
@@ -67,7 +71,11 @@ function DayLog(props) {
     function showWeatherQuestions(){
         if(!firstRender && token && props.userData.factors != 0){
             props.userData.weatherFactors.forEach(element => {
-                compareDates(element,weatherQuestions);
+                if(element.logs.length == 0){
+                    weatherQuestions.push(element);
+                }else{
+                    compareDates(element,weatherQuestions);
+                }
             });
             return(
                 <div>
