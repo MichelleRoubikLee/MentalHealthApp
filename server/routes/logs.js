@@ -8,7 +8,7 @@ const express = require("express");
 const router = express.Router();
 
 //add a new log
-router.put('/:userId/:factorId/log', async (req, res) => {
+router.put('/:userId/:factorId/log', auth, async (req, res) => {
     try{
         const { error } = validateLog(req.body);
         if(error) return res.status(400).send("ValidationError " + error);
@@ -20,9 +20,7 @@ router.put('/:userId/:factorId/log', async (req, res) => {
         const user = await User.findById(req.params.userId);
         await user.factors.id(req.params.factorId).logs.push(log);
         await user.save()
-        
-        console.log(user);
-        
+                
         if (!user) return res.status(400).send(`The user with id "${req.params.userid}" does not exist.`);
 
         return res.send(user);
@@ -32,7 +30,7 @@ router.put('/:userId/:factorId/log', async (req, res) => {
     }
 });
 
-router.put('/:userId/:factorId/weatherlog', async (req, res) => {
+router.put('/:userId/:factorId/weatherlog', auth, async (req, res) => {
     try{
         const { error } = validateLog(req.body);
         if(error) return res.status(400).send("ValidationError " + error);
@@ -44,9 +42,7 @@ router.put('/:userId/:factorId/weatherlog', async (req, res) => {
         const user = await User.findById(req.params.userId);
         await user.weatherFactors.id(req.params.factorId).logs.push(log);
         await user.save()
-        
-        console.log(user);
-        
+                
         if (!user) return res.status(400).send(`The user with id "${req.params.userid}" does not exist.`);
 
         return res.send(user);

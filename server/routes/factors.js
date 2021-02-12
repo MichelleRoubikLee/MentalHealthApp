@@ -7,7 +7,7 @@ const express = require("express");
 const router = express.Router();
 
 //add a new factor
-router.put('/:userId/factor', async (req, res) => {
+router.put('/:userId/factor', auth, async (req, res) => {
     try{
         const { error } = validateFactor(req.body);
         if(error) return res.status(400).send("ValidationError " + error);
@@ -36,7 +36,7 @@ router.put('/:userId/factor', async (req, res) => {
 });
 
 //add a new factor
-router.put('/:userId/weatherfactor', async (req, res) => {
+router.put('/:userId/weatherfactor', auth, async (req, res) => {
     try{
         const { error } = validateWeatherFactor(req.body);
         if(error) return res.status(400).send("ValidationError " + error);

@@ -13,7 +13,6 @@ import {API_BASE_URL} from './components/config/default';
 
 
 function App() {
-    // send token with factor additions, add auth on all backend additions
     // send log data to chart visual
     // calculate time now - time of last log to see if can log again or not
     // add answer string to number in log history
@@ -29,6 +28,7 @@ function App() {
             const newurl = API_BASE_URL + decoded._id;
             const res = await axios({
                 method: 'get',
+                headers: {'x-auth-token': token},
                 url: newurl,
             });
             setUserData(res.data);

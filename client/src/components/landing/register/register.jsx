@@ -32,7 +32,6 @@ function Register(props) {
                 email: register.email
             }
         }).then((res) => {
-            console.log(res)
             if (res.status === 200) {
                 sessionStorage.setItem('sessionId', res.data);
                 history.push("/profile");

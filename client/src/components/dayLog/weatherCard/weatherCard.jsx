@@ -42,7 +42,6 @@ function WeatherCard(props) {
             }
         
         const newurl = API_LOG_URL + decoded._id + "/" + props.factor._id + "/weatherlog";
-        console.log(props.factor);
         axios({
             method: 'put',
             url: newurl,

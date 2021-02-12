@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import jwt_decode from "jwt-decode";
+//import axios from 'axios';
+//import jwt_decode from "jwt-decode";
 import "./historyCard.css";
 import "../../../styles.css"
 

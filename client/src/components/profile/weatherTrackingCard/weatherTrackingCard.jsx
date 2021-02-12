@@ -15,6 +15,7 @@ function TrackingCard(props) {
         const newurl = API_FACTOR_URL + decoded._id + "/weatherfactor";
         axios({
             method: 'put',
+            headers: {'x-auth-token': token},
             url: newurl,
             data: {
                 factorName: props.factor.factorName,
