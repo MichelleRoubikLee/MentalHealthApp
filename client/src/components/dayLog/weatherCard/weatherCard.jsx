@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import {API_WEATHER_KEY, API_LOG_URL} from '../../config/default';
+var Regex = require("regex");
 
 
 
@@ -9,25 +10,30 @@ function WeatherCard(props) {
     var token = sessionStorage.getItem('sessionId');
     let data = "";
     let temperature = "";
-    let humidity = ""; //humidity in %
+    let humidity = ""; 
     let pressure = "";
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/weather';
-        const zipCode = 53150;
+        const zipCode = props.zipCode;
         const weatherUrl = `${WEATHER_API_URL}?zip=${zipCode},us&appid=${API_WEATHER_KEY}&units=imperial`; 
-
-        await axios({
-            method: 'get',
-            url: weatherUrl,
-        }).then((res) => {
-            temperature = res.data.main.temp;  //in degF
-            humidity = res.data.main.humidity; //humidity in %
-            pressure = res.data.main.pressure; //pressure in hPa
-            //console.log(res.data.main)
-        });
-        saveToDb();
+        var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
+        if(isValidZip){
+            await axios({
+                method: 'get',
+                url: weatherUrl,
+            }).then((res) => {
+                temperature = res.data.main.temp;  //in degF
+                humidity = res.data.main.humidity; //humidity in %
+                pressure = res.data.main.pressure; //pressure in hPa
+                //console.log(res.data.main)
+            });
+            saveToDb();
+        }else{
+            alert(zipCode + ' is not valid. Please enter a US zip code.');
+        }
+        
     };
 
     const saveToDb = async () => {
@@ -57,6 +63,7 @@ function WeatherCard(props) {
 
     return (
         <div className="WeatherCard flex-child">
+            {props.zipCode}
             <form onSubmit={handleSubmit} className="form-floating">
                 <label>
                     {props.factor.factorName}

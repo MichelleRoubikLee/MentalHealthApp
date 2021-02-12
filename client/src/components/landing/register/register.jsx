@@ -3,6 +3,8 @@ import axios from 'axios';
 import '../register/register.css';
 import '../../../styles.css';
 import { useHistory } from 'react-router-dom';
+var Regex = require("regex");
+
 
 
 function Register(props) {    
@@ -22,22 +24,28 @@ function Register(props) {
     
     const handleRegister = (event) => {
         event.preventDefault();
-        const newurl = 'http://localhost:5000/api/users/new';
-        axios({
-            method: 'post',
-            url: newurl,
-            data: {
-                userName: register.userName,
-                password: register.password,
-                email: register.email
-            }
-        }).then((res) => {
-            if (res.status === 200) {
-                sessionStorage.setItem('sessionId', res.data);
-                history.push("/profile");
-            }
-            props.getUser();
-        })            
+        //check if email address is valid
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(register.email))
+        {
+            const newurl = 'http://localhost:5000/api/users/new';
+            axios({
+                method: 'post',
+                url: newurl,
+                data: {
+                    userName: register.userName,
+                    password: register.password,
+                    email: register.email
+                }
+            }).then((res) => {
+                if (res.status === 200) {
+                    sessionStorage.setItem('sessionId', res.data);
+                    history.push("/profile");
+                }
+                props.getUser();
+            })     
+        }else{
+            alert(register.email + 'is not a valid email address. Please fix and try again.')
+        } 
     };
         
     

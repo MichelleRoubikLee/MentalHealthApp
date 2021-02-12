@@ -6,17 +6,20 @@ import "./dayLog.css";
 import useFirstRender from "../../firstRenderHook/useFirstRender";
 //import jwt_decode from "jwt-decode";
 
-
-
 function DayLog(props) {
+    const [zipCode, setZipCode] = useState("")
     const firstRender = useFirstRender();
     var date = new Date().toISOString()
     var token = sessionStorage.getItem('sessionId');
     //var decoded = jwt_decode(token);
 
+    const handleChange = (event) => {
+        setZipCode(event.target.value)
+    }
 
     function showQuestions(){
         if(token && props.userData.factors != 0){
+            //now date minus log date, if > 12, show card
             props.userData.factors.forEach(element => {
                 if(element.logs.length == 0){
                     console.log(element.logs.length)
@@ -40,16 +43,26 @@ function DayLog(props) {
             return(
                 <div>
                     {props.userData.weatherFactors.map((oneFactor, index) => (
-                        <WeatherCard key={index} factor={oneFactor} getUser = {props.getUser} userData={props.userData}/>
+                        <WeatherCard key={index} factor={oneFactor} getUser = {props.getUser} userData={props.userData} zipCode={zipCode}/>
                     ))}
                 </div>
             )
         }
-     }
+    }
 
     return (
         <div className="DayLog flex-container">
             {showQuestions()}
+            <label htmlFor = "zipCode">Zip Code</label>
+            <input 
+                type = "text" 
+                id = "zipCode" 
+                name = 'zipCode'  
+                className = "form-control text-box"
+                value={zipCode}
+                onChange={handleChange}
+            >
+            </input>
             {showWeatherQuestions()}
         </div>
     );
