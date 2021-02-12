@@ -1,4 +1,4 @@
-import React, { useState }from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../login/login.css';
 import '../../../styles.css';
@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 
 
 function Login (props) {
-
 
     const [login, setLogin] = useState({ 
         email: '', 
@@ -38,8 +37,9 @@ function Login (props) {
                 history.push("/profile");
             }
             console.log(res);
-            //get user sets
             props.getUser();
+        }).catch(() => {
+            alert("User not found. If you are a new user, please register first.")
         });
     }
 
