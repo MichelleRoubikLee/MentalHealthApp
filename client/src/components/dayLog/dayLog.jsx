@@ -79,20 +79,31 @@ function DayLog(props) {
         }
     }
 
+    function askZipCode(){
+        if(weatherQuestions.length > 0){
+            return (
+                <div>
+                    <label htmlFor = "zipCode">Zip Code</label>
+                        <input 
+                            type = "text" 
+                            id = "zipCode" 
+                            name = 'zipCode'  
+                            className = "form-control text-box"
+                            value={zipCode}
+                            onChange={handleChange}
+                        >
+                    </input>
+                </div>
+            )
+        }
+    }
+
     return (
         <div className="DayLog flex-container">
             {showQuestions()}
-            <label htmlFor = "zipCode">Zip Code</label>
-            <input 
-                type = "text" 
-                id = "zipCode" 
-                name = 'zipCode'  
-                className = "form-control text-box"
-                value={zipCode}
-                onChange={handleChange}
-            >
-            </input>
+            
             {showWeatherQuestions()}
+            {askZipCode()}
         </div>
     );
 }
