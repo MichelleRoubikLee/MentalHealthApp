@@ -6,6 +6,9 @@ import './visual.css';
 
 
 function Visual(props) {
+
+    //need to organize data logs by dat
+
     const [chartData, setChartData] = useState({});
     let factorName = '';
     //let datasetArray = [];
@@ -13,19 +16,19 @@ function Visual(props) {
     let dataResults = [];
 
     function showDate(date){
+        const hours = date.slice(11,13);
         const year = date.slice(0,4);
         const month = date.slice(5,7);
         const day = date.slice(8,10);
-        const displayDate = month + "/" + day + "/" + year;
+        const displayDate = `${month}/${day} Hours:${hours}`
+        //month + "/" + day + "/" + year ;
         return displayDate;
     }
 
-    function createDataSets(){
-        
-        if(props.userData.factors.length !== 0){
-            console.log(props.userData)
-        
-            let factor = props.userData.factors[0] //.forEach(factor => {
+    const createDataSets = () => {
+        for(let i = 0; i < props.userData.factors.length; i++){
+            console.log(props.userData.factors);
+            let factor = props.userData.factors[i];
                 
             factorName = factor.factorName;
             factor.logs.forEach(log => {
@@ -33,37 +36,35 @@ function Visual(props) {
                 dataResults.push(log.result);
 
             })
+            console.log(chartData);
 
-            console.log(dateLabels);
-            console.log(dataResults);
+            setChartData(chartData => ({...chartData,
+                labels: dateLabels,
+                datasets: [
+                    {
+                        label: factorName,
+                        data: dataResults,
+                        backgroundColor: [
+                            'rgba(255,100,100,.6)'
+                        ],
+                        borderWidth: 4,
+                        fill: false
+                    }
+                ]
+            }))
+            //dateLabels = [];
+            //dataResults = [];
         }
     }
     
-    
-    const chart = () => {
-        setChartData(chartData => ({...chartData,
-            labels: dateLabels,
-            datasets: [
-                {
-                    label: factorName,
-                    data: dataResults,
-                    backgroundColor: [
-                        'rgba(255,100,100,.6)'
-                    ],
-                    borderWidth: 4,
-                    fill: false
-                }
-            ]
-        }))
-    }
 
-    useEffect(()=> {
-        chart();
+    useEffect( () => {
+        createDataSets();
     },[])
 
     return(
         <div className='Visual'>
-        {createDataSets()}
+        {/* {createDataSets()} */}
             <Line data={chartData} options={{
                 responseive: true,
                 title: {text: 'Mental Health Concerns vs External Factors', display: true},
@@ -76,7 +77,10 @@ function Visual(props) {
                                 beginAtZero: true
                             }
                         }
-                    ]
+                    ],
+                    xAxes: [{
+                        type: 'time'
+                    }]
                 }
             }}/>
         </div>

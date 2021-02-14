@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
     joinDate: {type: Date, default: Date.now()},
     email: {type: String, required: false},
     password: {type: String, required: false},
+    badges: {type: Array, required: false},
     factors: [factorSchema],
     weatherFactors: [weatherFactorSchema]
 });

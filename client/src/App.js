@@ -14,9 +14,11 @@ import {API_BASE_URL} from './components/config/default';
 
 function App() {
     // send log data to chart visual
-    // add answer string to number in log history
+    // add tracking rewards
     // delete token from session on signout
-    // added features: add welcome page to avoid re-rendering, choose to stop tracking a feature, edit a factor log
+    // add recomended tracking to list
+    // create dummy data to show graphs 
+    // added features: add answer string to number in log history, add welcome page to avoid re-rendering, choose to stop tracking a feature, edit a factor log
 
     const [userData, setUserData] = useState({factors: []});
 
