@@ -63,7 +63,6 @@ function WeatherCard(props) {
 
     return (
         <div className="WeatherCard flex-child">
-            {props.zipCode}
             <form onSubmit={handleSubmit} className="form-floating">
                 <label>
                     {props.factor.factorName}
