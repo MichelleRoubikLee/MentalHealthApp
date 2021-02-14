@@ -3,69 +3,61 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import Chartjs from 'chart.js';
 import './visual.css';
-
+import useFirstRender from "../../firstRenderHook/useFirstRender";
 
 function Visual(props) {
 
-    //need to organize data logs by dat
+    let logData = [];
+    const firstRender = useFirstRender();
+    var chartData = {};
+    var chartDatasets = [];
 
-    const [chartData, setChartData] = useState({});
-    let factorName = '';
-    //let datasetArray = [];
-    let dateLabels = [];
-    let dataResults = [];
+    const datasetKeyProvider=()=>{ 
+        return btoa(Math.random()).substring(0,12)
+    }
 
     function showDate(date){
         const hours = date.slice(11,13);
         const year = date.slice(0,4);
         const month = date.slice(5,7);
         const day = date.slice(8,10);
-        const displayDate = `${month}/${day} Hours:${hours}`
-        //month + "/" + day + "/" + year ;
+        const displayDate = `${month}/${day}/${year} ${hours}`
         return displayDate;
     }
 
-    const createDataSets = () => {
-        for(let i = 0; i < props.userData.factors.length; i++){
-            console.log(props.userData.factors);
-            let factor = props.userData.factors[i];
+    useEffect(() => {
+        createDataSets();
+    },[props.userData])
+
+    function createDataSets(){
+        if(props.userData.factors.length == 0 && firstRender){
+            console.log("hit")
+            props.getUser();
+        }else{
+            for(let i = 0; i < props.userData.factors.length; i++){
+                //console.log(props.userData.factors[i].factorName, props.userData.factors[i].logs)
+                let factor = props.userData.factors[i];
+                factor.logs.forEach(log => {
+                    logData.push({
+                        x:(showDate(log.date)), 
+                        y:log.result
+                    });
+                })
+                chartDatasets.push({data: logData, label: factor.factorName})
+                logData = [];
+            } 
+            chartData = { 
                 
-            factorName = factor.factorName;
-            factor.logs.forEach(log => {
-                dateLabels.push(showDate(log.date));
-                dataResults.push(log.result);
-
-            })
-            console.log(chartData);
-
-            setChartData(chartData => ({...chartData,
-                labels: dateLabels,
-                datasets: [
-                    {
-                        label: factorName,
-                        data: dataResults,
-                        backgroundColor: [
-                            'rgba(255,100,100,.6)'
-                        ],
-                        borderWidth: 4,
-                        fill: false
-                    }
-                ]
-            }))
-            //dateLabels = [];
-            //dataResults = [];
+                datasets: [chartDatasets]
+                
+            }
+            console.log(chartData)
         }
     }
-    
-
-    useEffect( () => {
-        createDataSets();
-    },[])
 
     return(
         <div className='Visual'>
-        {/* {createDataSets()} */}
-            <Line data={chartData} options={{
+            <Line data={chartData} datasetKeyProvider={datasetKeyProvider} options={{
                 responseive: true,
                 title: {text: 'Mental Health Concerns vs External Factors', display: true},
                 scales: {
@@ -79,7 +71,16 @@ function Visual(props) {
                         }
                     ],
                     xAxes: [{
-                        type: 'time'
+                        type: 'time',
+                        time: {
+                            parser: 'MM/DD/YYYY HH',
+                            tooltipFormat: 'll HH',
+                            unit: 'day',
+                            unitStepSize: 1,
+                            displayFormats: {
+                            'day': 'MM/DD/YYYY'
+                            }
+                        }
                     }]
                 }
             }}/>
