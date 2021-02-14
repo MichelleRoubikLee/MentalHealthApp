@@ -46,44 +46,51 @@ function Visual(props) {
                 chartDatasets.push({data: logData, label: factor.factorName})
                 logData = [];
             } 
-            chartData = { 
-                
-                datasets: [chartDatasets]
-                
-            }
-            console.log(chartData)
+            chartData = { datasets: chartDatasets, labels: ["line"]}
         }
+        
+        return (
+            <div>
+            {console.log(showDate(props.userData.joinDate))}
+                <Line data={chartData} datasetKeyProvider={datasetKeyProvider} options={{
+                    responseive: true,
+                    title: {text: 'Mental Health Concerns vs External Factors', display: true},
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks:{
+                                    autoSkip: true,
+                                    maxTicksLimit: 5,
+                                    beginAtZero: true
+                                },
+                                stacked: true,
+                            }
+                        ],
+                        xAxes: [{
+                            type: 'time',
+                            time: {
+                                parser: 'MM/DD/YYYY HH',
+                                min: showDate(props.userData.joinDate),
+                                tooltipFormat: 'll HH',
+                                unit: 'day',
+                                unitStepSize: 1,
+                                displayFormats: {
+                                    'day': 'MM/DD/YYYY HH'
+                                }
+                            },
+                            distribution: 'linear'
+                        }]
+                    }
+                }}/>
+            </div>
+
+            
+        )
     }
 
     return(
         <div className='Visual'>
-            <Line data={chartData} datasetKeyProvider={datasetKeyProvider} options={{
-                responseive: true,
-                title: {text: 'Mental Health Concerns vs External Factors', display: true},
-                scales: {
-                    yAxes: [
-                        {
-                            ticks:{
-                                autoSkip: true,
-                                maxTicksLimit: 5,
-                                beginAtZero: true
-                            }
-                        }
-                    ],
-                    xAxes: [{
-                        type: 'time',
-                        time: {
-                            parser: 'MM/DD/YYYY HH',
-                            tooltipFormat: 'll HH',
-                            unit: 'day',
-                            unitStepSize: 1,
-                            displayFormats: {
-                            'day': 'MM/DD/YYYY'
-                            }
-                        }
-                    }]
-                }
-            }}/>
+            {createDataSets()}
         </div>
     )
     

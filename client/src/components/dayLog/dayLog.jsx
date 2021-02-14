@@ -112,6 +112,7 @@ function DayLog(props) {
             
             {showWeatherQuestions()}
             {askZipCode()}
+            <h6>If there are no factors to track, add new factors from the profile page or come back after at least 12 hours to log again.</h6>
         </div>
     );
 }

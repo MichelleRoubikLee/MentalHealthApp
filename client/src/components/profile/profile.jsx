@@ -91,20 +91,20 @@ function Profile(props) {
     }
 
 
-  return (
-    <div className="Profile">
-        <div>Track Your Mental Health Concerns and Factors:</div>
-        {addTrackingCards()}
-        {trackingArray.map((factorData, index) => (
-           <TrackingCard key={index} factor={factorData} getUser = {props.getUser}/> 
-        ))}
-        {addWeatherDataCards()}
-        {weatherTrackingArray.map((weatherFactorData, index) => (
-           <WeatherTrackingCard key={index} factor={weatherFactorData} getUser = {props.getUser}/> 
-        ))}
-        
-    </div>
-  );
+    return (
+        <div className="Profile">
+            <div>Here are our reccomended health concerns and factors to track:</div>
+            {addTrackingCards()}
+            {trackingArray.map((factorData, index) => (
+            <TrackingCard key={index} factor={factorData} getUser = {props.getUser}/> 
+            ))}
+            {addWeatherDataCards()}
+            {weatherTrackingArray.map((weatherFactorData, index) => (
+            <WeatherTrackingCard key={index} factor={weatherFactorData} getUser = {props.getUser}/> 
+            ))}
+            
+        </div>
+    );
 }
 
 export default Profile;

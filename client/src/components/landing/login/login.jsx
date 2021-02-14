@@ -34,7 +34,7 @@ function Login (props) {
             console.log(res)
             if (res.status === 200) {
                 sessionStorage.setItem('sessionId', res.data);
-                history.push("/profile");
+                history.push("/daylog");
             }
             console.log(res);
             props.getUser();
