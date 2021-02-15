@@ -11,12 +11,14 @@ function Visual(props) {
     const firstRender = useFirstRender();
     var chartData = {};
     var chartDatasets = [];
+    var colors = ["#ff6464", "#ffaa64", "#700961", "#b80d57"];
 
     const datasetKeyProvider=()=>{ 
         return btoa(Math.random()).substring(0,12)
     }
 
     function showDate(date){
+        //console.log(date)
         const hours = date.slice(11,13);
         const year = date.slice(0,4);
         const month = date.slice(5,7);
@@ -35,33 +37,36 @@ function Visual(props) {
             props.getUser();
         }else{
             for(let i = 0; i < props.userData.factors.length; i++){
-                //console.log(props.userData.factors[i].factorName, props.userData.factors[i].logs)
+                console.log(props.userData.factors[i])
                 let factor = props.userData.factors[i];
                 factor.logs.forEach(log => {
+                    //console.log(log.date)
                     logData.push({
                         x:(showDate(log.date)), 
                         y:log.result
                     });
                 })
-                chartDatasets.push({data: logData, label: factor.factorName})
+                chartDatasets.push({data: logData, label: factor.factorName, borderColor: colors[i]})
                 logData = [];
             } 
-            chartData = { datasets: chartDatasets, labels: ["line"]}
+            chartData = { datasets: chartDatasets }
+            console.log(chartData)
         }
         
         return (
             <div>
-            {console.log(showDate(props.userData.joinDate))}
                 <Line data={chartData} datasetKeyProvider={datasetKeyProvider} options={{
                     responseive: true,
                     title: {text: 'Mental Health Concerns vs External Factors', display: true},
+                    fill: false,
                     scales: {
                         yAxes: [
                             {
                                 ticks:{
                                     autoSkip: true,
                                     maxTicksLimit: 5,
-                                    beginAtZero: true
+                                    beginAtZero: true,
+                                    //max: 6
                                 },
                                 stacked: true,
                             }
@@ -70,7 +75,7 @@ function Visual(props) {
                             type: 'time',
                             time: {
                                 parser: 'MM/DD/YYYY HH',
-                                min: showDate(props.userData.joinDate),
+                                min: showDate("2021-02-01T02:00:41.684Z"),
                                 tooltipFormat: 'll HH',
                                 unit: 'day',
                                 unitStepSize: 1,

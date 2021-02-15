@@ -13,7 +13,7 @@ import {API_BASE_URL} from './components/config/default';
 
 
 function App() {
-    // send log data to chart visual
+    // send weather log data to chart visual
     // add tracking rewards
     // delete token from session on signout
     // create dummy data to show graphs 
