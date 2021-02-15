@@ -47,7 +47,8 @@ function Visual(props) {
                         y:log.result
                     });
                 })
-                chartDatasets.push({data: logData, label: factor.factorName, borderColor: colors[i], yAxisID: 'A',fill: false,})
+                let axisid= "A" + i;
+                chartDatasets.push({data: logData, label: factor.factorName, borderColor: colors[i], yAxisID: axisid,fill: false,})
                 logData = [];
             } 
             for(let i = 0; i < props.userData.weatherFactors.length; i++){
@@ -70,16 +71,41 @@ function Visual(props) {
         return (
             <div className="Visual">
                 <Line data={chartData} datasetKeyProvider={datasetKeyProvider} options={{
-                    responseive: true,
+                    responsive: true,
                     title: {text: 'Mental Health Concerns vs External Factors', display: true},
                     fill: false,
                     scales: {
                         yAxes: [
                             {
-                                id: 'A',
+                                id: 'A0',
                                 type: 'linear',
                                 position: 'left',
                                 ticks:{
+                                    fontColor: "#ff6464",
+                                    autoSkip: true,
+                                    maxTicksLimit: 5,
+                                    beginAtZero: true,
+                                },
+                                stacked: true,
+                            },
+                            {
+                                id: 'A1',
+                                type: 'linear',
+                                position: 'left',
+                                ticks:{
+                                    fontColor: "#ffaa64",
+                                    autoSkip: true,
+                                    maxTicksLimit: 5,
+                                    beginAtZero: true,
+                                },
+                                stacked: true,
+                            },
+                            {
+                                id: 'A2',
+                                type: 'linear',
+                                position: 'left',
+                                ticks:{
+                                    fontColor: "#700961",
                                     autoSkip: true,
                                     maxTicksLimit: 5,
                                     beginAtZero: true,
@@ -91,11 +117,15 @@ function Visual(props) {
                                 type: 'linear',
                                 position: 'right',
                                 ticks:{
+                                    fontColor: "#95e1d3",
                                     autoSkip: true,
                                     maxTicksLimit: 5,
                                     beginAtZero: true,
                                 },
                                 stacked: true,
+                                gridLines: {
+                                    display:false
+                                }
                             }
                         ],
                         xAxes: [{
@@ -107,10 +137,11 @@ function Visual(props) {
                                 unit: 'day',
                                 unitStepSize: 1,
                                 displayFormats: {
-                                    'day': 'MM/DD/YYYY HH'
+                                    'day': 'MM/DD'
                                 }
                             },
-                            distribution: 'linear'
+                            distribution: 'linear',
+                            
                         }]
                     }
                 }}/>

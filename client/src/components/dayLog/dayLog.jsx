@@ -79,7 +79,7 @@ function DayLog(props) {
                 }
             });
             return(
-                <div >
+                <div className="flex-child__daylog weather" >
                     {weatherQuestions.map((oneFactor, index) => (
                         <WeatherCard key={index} factor={oneFactor} getUser = {props.getUser} userData={props.userData} zipCode={zipCode}/>
                     ))}
@@ -91,13 +91,13 @@ function DayLog(props) {
     function askZipCode(){
         if(weatherQuestions.length > 0){
             return (
-                <div>
+                <div className="flex-child__daylog zip-code" >
                     <label htmlFor = "zipCode">Zip Code</label>
                         <input 
                             type = "text" 
                             id = "zipCode" 
                             name = 'zipCode'  
-                            className = "form-control text-box"
+                            className = "form-control text-box zip-code__input"
                             value={zipCode}
                             onChange={handleChange}
                         >
@@ -111,13 +111,11 @@ function DayLog(props) {
         <div className="DayLog">
         <div className="title__daylog">If there are no factors to track, add new factors from the profile page or come back after at least 12 hours to log again.</div>
             <div className="flex-container__daylog">
-                <div className="sidebar__space col-md-1"></div>
+            <div className="sidebar__space__daylog"></div>
+
                 {showQuestions()}
-                <div className="flex-child__daylog weather-section">
-                    
-                    {showWeatherQuestions()}
-                    {askZipCode()}
-                </div>
+                {showWeatherQuestions()}
+                {askZipCode()}
                 
             </div>
             
