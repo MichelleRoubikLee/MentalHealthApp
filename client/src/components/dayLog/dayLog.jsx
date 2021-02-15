@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import QuestionCard from "./questionCard/questionCard"
 import WeatherCard from "./weatherCard/weatherCard"
 import "./dayLog.css";
+import "../../styles.css";
 import useFirstRender from "../../firstRenderHook/useFirstRender";
 //import jwt_decode from "jwt-decode";
 
@@ -59,7 +60,7 @@ function DayLog(props) {
             });
 
             return(
-                <div>
+                <div className="flex-child__daylog flex-container__questions">
                     {questions.map((oneFactor, index) => (
                         <QuestionCard key={index} factor={oneFactor} getUser = {props.getUser}/>
                     ))} 
@@ -78,7 +79,7 @@ function DayLog(props) {
                 }
             });
             return(
-                <div>
+                <div >
                     {weatherQuestions.map((oneFactor, index) => (
                         <WeatherCard key={index} factor={oneFactor} getUser = {props.getUser} userData={props.userData} zipCode={zipCode}/>
                     ))}
@@ -107,12 +108,20 @@ function DayLog(props) {
     }
 
     return (
-        <div className="DayLog flex-container">
-            {showQuestions()}
+        <div className="DayLog">
+        <div className="title__daylog">If there are no factors to track, add new factors from the profile page or come back after at least 12 hours to log again.</div>
+            <div className="flex-container__daylog">
+                <div className="sidebar__space col-md-1"></div>
+                {showQuestions()}
+                <div className="flex-child__daylog weather-section">
+                    
+                    {showWeatherQuestions()}
+                    {askZipCode()}
+                </div>
+                
+            </div>
             
-            {showWeatherQuestions()}
-            {askZipCode()}
-            <h6>If there are no factors to track, add new factors from the profile page or come back after at least 12 hours to log again.</h6>
+            
         </div>
     );
 }

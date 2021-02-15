@@ -45,7 +45,7 @@ function Login (props) {
 
         
     return (
-        <div className = "loginInfo flex-child">
+        <div className = "loginInfo flex-child__login">
             <div>
                 <h1 className = "loginTitle" >Login</h1>
             </div>

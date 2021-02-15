@@ -1,4 +1,27 @@
 .DayLog{
-    margin: auto;
-    margin-left: 15rem;
+    min-height: 100vh;
+}
+
+.sidebar__space{
+    
+}
+
+.flex-container__questions{
+    height: 100vh;
+    width: 45vw;
+    /* margin: auto; */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.flex-child__questions{
+    min-width: 10rem;
+    width: 20vw;
+    padding: 1em ;
+    
+    border-style: solid;
+    margin-bottom: 1rem;
 }

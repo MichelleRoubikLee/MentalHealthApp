@@ -1,7 +1,9 @@
 .badgeCard{
     margin: 1em 1em 1em 1em; 
-    max-width: 50%;
+    min-width: 10rem;
+    width: 15rem;
     padding: 1em ;
     border-style: solid;
     background-color: #ff8264;
+    text-align: center;
 }

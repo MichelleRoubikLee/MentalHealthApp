@@ -17,7 +17,7 @@ function HistoryCard(props) {
    
 
     return (
-        <div className="HistoryCard flex-child col-md-4">
+        <div className="HistoryCard flex-child__history">
             <div className="content">
                 <h4 className="">{props.factor.factorName}</h4>
                 {props.factor.logs.map((log,index) => (

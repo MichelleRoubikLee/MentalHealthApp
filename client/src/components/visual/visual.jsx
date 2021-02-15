@@ -68,7 +68,7 @@ function Visual(props) {
         }
         
         return (
-            <div>
+            <div className="Visual">
                 <Line data={chartData} datasetKeyProvider={datasetKeyProvider} options={{
                     responseive: true,
                     title: {text: 'Mental Health Concerns vs External Factors', display: true},

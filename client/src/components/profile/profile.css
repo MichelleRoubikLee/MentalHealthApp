@@ -1,4 +1,12 @@
-.Profile{
-    width: 50%;
-    margin: auto;
+.tracking-card{
+    min-width: 15rem;
+    display: flex;
+    justify-content: space-between;
+    padding: .75rem;
+    border-style: solid;
+    margin: 1rem
+}
+
+label{
+    font-size: 1.3rem;
 }

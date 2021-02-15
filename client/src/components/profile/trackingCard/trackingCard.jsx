@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import "../profile.css"
 
 import {API_FACTOR_URL} from '../../config/default';
 
@@ -36,10 +37,10 @@ function TrackingCard(props) {
 
   return (
     <div className="TrackingCard">
-        <form onSubmit={handleSubmit}>
-        <label>{props.factor.factorName}</label>
-        <button type="submit">Start Tracking</button>
-      </form>
+        <form onSubmit={handleSubmit} className="tracking-card">
+            <label>{props.factor.factorName}</label>
+            <button type="submit">Start Tracking</button>
+        </form>
     </div>
   );
 }

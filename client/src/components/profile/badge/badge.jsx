@@ -18,7 +18,7 @@ function Badge(props) {
         },
         {
             'badgeName': 'The Multi-Tracker',
-            'requirement':  'track at least 4 different factors'
+            'requirement':  'track at least 4 different factors (not weather)'
 
         },
         {

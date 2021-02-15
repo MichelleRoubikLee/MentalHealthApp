@@ -7,8 +7,8 @@ import "./historyLogs.css"
 function HistoryLogs(props) {
 
     return (
-        <div className="HistoryLogs flex-container container">
-        {/* put extra div here only when nav not collapsed (size is 1/6)*/}
+        <div className="HistoryLogs flex-container__history">
+            <div className="sidebar__space col-md-1"></div>
             {props.userData.factors.map((oneFactor, index) => (
                 <HistoryCard key={index} factor={oneFactor}/>
             ))}   

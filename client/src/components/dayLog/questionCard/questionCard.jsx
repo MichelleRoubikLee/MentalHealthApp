@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import {API_LOG_URL} from '../../config/default';
-import "./questionCard.css"
+import "./questionCard.css";
+import "../dayLog.css";
 
 
 
@@ -34,7 +35,7 @@ function QuestionCard(props) {
     }
 
     return (
-        <div className="QuestionCard flex-child">
+        <div className="QuestionCard flex-child__questions">
             <form onSubmit={handleSubmit} className="form-floating">
                 <div className="">{props.factor.question}</div>
                 {props.factor.answers.map((answer, index) => (

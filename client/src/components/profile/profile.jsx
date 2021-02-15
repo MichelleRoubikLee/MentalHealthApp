@@ -9,7 +9,6 @@ function Profile(props) {
     let trackingArray = [];
     let weatherTrackingArray = [];
     const firstRender = useFirstRender();
-    //var token = sessionStorage.getItem('sessionId');
 
 
     let factorData = [
@@ -94,18 +93,23 @@ function Profile(props) {
 
     return (
         <div className="Profile">
-            <div>Here are our reccomended health concerns and factors to track:</div>
-            {addTrackingCards()}
-            {trackingArray.map((factorData, index) => (
-                <TrackingCard key={index} factor={factorData} getUser = {props.getUser}/> 
-            ))}
-            {addWeatherDataCards()}
-            {weatherTrackingArray.map((weatherFactorData, index) => (
-                <WeatherTrackingCard key={index} factor={weatherFactorData} getUser = {props.getUser}/> 
-            ))}
-
-            <Badge userData = {props.userData}/>
-            
+            <div className="title__profile">Start tracking health and environmental factors and see your motivational badges.</div>
+                <div className="flex-container__profile">
+                    <div className="sidebar__space col-md-1"></div>
+                    <div className="flex-child__profile">
+                        {addTrackingCards()}
+                        {trackingArray.map((factorData, index) => (
+                            <TrackingCard key={index} factor={factorData} getUser = {props.getUser}/> 
+                        ))}
+                        {addWeatherDataCards()}
+                        {weatherTrackingArray.map((weatherFactorData, index) => (
+                            <WeatherTrackingCard key={index} factor={weatherFactorData} getUser = {props.getUser}/> 
+                        ))}
+                    </div>
+                    <div className="flex-child__profile">
+                        <Badge userData = {props.userData}/>
+                    </div>
+            </div>
         </div>
     );
 }

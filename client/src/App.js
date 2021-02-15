@@ -13,7 +13,6 @@ import {API_BASE_URL} from './components/config/default';
 
 
 function App() {
-    // add tracking rewards
     // delete token from session on signout
     // added features: add answer string to number in log history, add welcome page to avoid re-rendering, choose to stop tracking a feature, edit a factor log
 
