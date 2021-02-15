@@ -13,10 +13,8 @@ import {API_BASE_URL} from './components/config/default';
 
 
 function App() {
-    // send weather log data to chart visual
     // add tracking rewards
     // delete token from session on signout
-    // create dummy data to show graphs 
     // added features: add answer string to number in log history, add welcome page to avoid re-rendering, choose to stop tracking a feature, edit a factor log
 
     const [userData, setUserData] = useState({factors: []});

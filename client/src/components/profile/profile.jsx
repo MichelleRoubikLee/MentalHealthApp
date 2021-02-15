@@ -1,6 +1,7 @@
 import React from 'react';
 import TrackingCard from './trackingCard/trackingCard';
-import WeatherTrackingCard from './weatherTrackingCard/weatherTrackingCard'
+import WeatherTrackingCard from './weatherTrackingCard/weatherTrackingCard';
+import Badge from './badge/badge';
 import "./profile.css";
 import useFirstRender from "../../firstRenderHook/useFirstRender";
 
@@ -77,8 +78,8 @@ function Profile(props) {
 
     function addWeatherDataCards(){
         if(!firstRender){
-            console.log(props.userData.weatherFactors)
-            if(props.userData.weatherFactors.length == 0){ //props.userData.weatherFactors === undefined  || 
+            //console.log(props.userData.weatherFactors)
+            if(props.userData.weatherFactors.length == 0){ 
                 weatherTrackingArray = weatherData;
             }else{
                 weatherTrackingArray = weatherData.filter(array => 
@@ -96,12 +97,14 @@ function Profile(props) {
             <div>Here are our reccomended health concerns and factors to track:</div>
             {addTrackingCards()}
             {trackingArray.map((factorData, index) => (
-            <TrackingCard key={index} factor={factorData} getUser = {props.getUser}/> 
+                <TrackingCard key={index} factor={factorData} getUser = {props.getUser}/> 
             ))}
             {addWeatherDataCards()}
             {weatherTrackingArray.map((weatherFactorData, index) => (
-            <WeatherTrackingCard key={index} factor={weatherFactorData} getUser = {props.getUser}/> 
+                <WeatherTrackingCard key={index} factor={weatherFactorData} getUser = {props.getUser}/> 
             ))}
+
+            <Badge userData = {props.userData}/>
             
         </div>
     );

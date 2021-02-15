@@ -12,6 +12,7 @@ function Visual(props) {
     var chartData = {};
     var chartDatasets = [];
     var colors = ["#ff6464", "#ffaa64", "#700961", "#b80d57"];
+    var weatherColors = ["#95e1d3","#007965"]
 
     const datasetKeyProvider=()=>{ 
         return btoa(Math.random()).substring(0,12)
@@ -46,9 +47,22 @@ function Visual(props) {
                         y:log.result
                     });
                 })
-                chartDatasets.push({data: logData, label: factor.factorName, borderColor: colors[i]})
+                chartDatasets.push({data: logData, label: factor.factorName, borderColor: colors[i], yAxisID: 'A',fill: false,})
                 logData = [];
             } 
+            for(let i = 0; i < props.userData.weatherFactors.length; i++){
+                console.log(props.userData.weatherFactors[i])
+                let weatherFactor = props.userData.weatherFactors[i];
+                weatherFactor.logs.forEach(log => {
+                    //console.log(log.date)
+                    logData.push({
+                        x:(showDate(log.date)), 
+                        y:log.result
+                    });
+                })
+                chartDatasets.push({data: logData, label: weatherFactor.factorName, borderColor: weatherColors[i], yAxisID: 'B',fill: false,})
+                logData = [];
+            }  
             chartData = { datasets: chartDatasets }
             console.log(chartData)
         }
@@ -62,11 +76,24 @@ function Visual(props) {
                     scales: {
                         yAxes: [
                             {
+                                id: 'A',
+                                type: 'linear',
+                                position: 'left',
                                 ticks:{
                                     autoSkip: true,
                                     maxTicksLimit: 5,
                                     beginAtZero: true,
-                                    //max: 6
+                                },
+                                stacked: true,
+                            },
+                            {
+                                id: 'B',
+                                type: 'linear',
+                                position: 'right',
+                                ticks:{
+                                    autoSkip: true,
+                                    maxTicksLimit: 5,
+                                    beginAtZero: true,
                                 },
                                 stacked: true,
                             }

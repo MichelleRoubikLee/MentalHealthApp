@@ -27,7 +27,7 @@ function WeatherCard(props) {
                 temperature = res.data.main.temp;  //in degF
                 humidity = res.data.main.humidity; //humidity in %
                 pressure = res.data.main.pressure; //pressure in hPa
-                //console.log(res.data.main)
+                console.log(temperature, humidity, pressure)
             });
             saveToDb();
         }else{
@@ -38,15 +38,13 @@ function WeatherCard(props) {
 
     const saveToDb = async () => {
         var decoded = jwt_decode(token);
-        
-            if(props.factor.factorName = 'Temperature'){
-                data = temperature;
-            }else if(props.factor.factorName = 'Humidity'){
-                data = humidity;
-            }else if(props.factor.factorName = 'Pressure'){
-                data = pressure;
-            }
-        
+        if(props.factor.factorName == 'Temperature'){
+            data = temperature;
+        }else if(props.factor.factorName == 'Humidity'){
+            data = humidity;
+        }else if(props.factor.factorName == 'Pressure'){
+            data = pressure;
+        }        
         const newurl = API_LOG_URL + decoded._id + "/" + props.factor._id + "/weatherlog";
         axios({
             method: 'put',
