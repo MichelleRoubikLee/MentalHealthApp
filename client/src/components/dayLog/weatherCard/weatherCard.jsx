@@ -60,7 +60,7 @@ function WeatherCard(props) {
     }
 
     return (
-        <div className="WeatherCard flex-child__daylog">
+        <div className="WeatherCard flex-child__daylog ">
             <form onSubmit={handleSubmit} className="form-floating">
                 <label>
                     {props.factor.factorName}

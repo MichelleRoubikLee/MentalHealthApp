@@ -28,6 +28,11 @@ function Profile(props) {
             'answers': ['Severe Stress','Bad Stress','Some Stress','Little Stress','No Stress']
         },
         {
+            'factorName': 'Fatigue',
+            'question': 'How is your fatigue today?',
+            'answers': ['Severe Fatigue','Bad Fatigue','Some Fatigue','Little Fatigue','No Fatigue']
+        },
+        {
             'factorName': 'Meditation',
             'question': 'Did you meditate today?',
             'answers': ['No','Yes']
